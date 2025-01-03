@@ -1,5 +1,5 @@
 ---
-title: "HTB WU"
+title: "Hack The Box University 2024"
 categories: ["Writeup"]
 tags: ["Web"]
 #externalUrl: ""

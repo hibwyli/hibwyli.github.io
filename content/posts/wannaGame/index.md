@@ -1,5 +1,5 @@
 ---
-title: "WannaGame WU"
+title: "WannaGame"
 categories: ["Writeup"]
 tags: ["Web"]
 #externalUrl: ""
