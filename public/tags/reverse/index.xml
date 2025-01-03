@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reverse on hibwyli</title>
+    <link>//localhost:1313/tags/reverse/</link>
+    <description>Recent content in Reverse on hibwyli</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Copyright © Shin24</copyright>
+    <lastBuildDate>Fri, 03 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/tags/reverse/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>CR3 CTF 2024</title>
+      <link>//localhost:1313/posts/cr3-2024/</link>
+      <pubDate>Fri, 03 May 2024 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/posts/cr3-2024/</guid>
+      <description>CR3 CTF 2024</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/posts/cr3-2024/featurecr3.png" />
+    </item>
+    
+  </channel>
+</rss>

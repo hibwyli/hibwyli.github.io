@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Research on hibwyli</title>
+    <link>//localhost:1313/categories/research/</link>
+    <description>Recent content in Research on hibwyli</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>Copyright © Shin24</copyright>
+    <lastBuildDate>Mon, 20 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/categories/research/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Apache Airflow not so Remote Code Execution</title>
+      <link>//localhost:1313/posts/airflow-research/</link>
+      <pubDate>Mon, 20 May 2024 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/posts/airflow-research/</guid>
+      <description>Airflow researching</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/posts/airflow-research/featureairflow.png" />
+    </item>
+    
+  </channel>
+</rss>
