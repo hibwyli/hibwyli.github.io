@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © Hibwyli</copyright>
-    <lastBuildDate>Tue, 25 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/authors/hibwyli/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/authors/hibwyli/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Rebuild CVE-2025-49113</title>
+      <link>//localhost:1313/posts/cve/</link>
+      <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/posts/cve/</guid>
+      <description>Rebuild CVE-2025-49113 # Source : https://fearsoff.org/research/roundcube
+Root cause : # Bug at custom unserialization Sink In Secure Deserialization at Pear Crypt package. Introduction: # Roundcub is a free and open source webmail software for the masses, written in PHP. How roundcube handle session ? # It will serialize of data and then base64 encode then store into MYSQL at table session with columns vars. It sound simple right ? But the problem when you try to decode that base64 is : Well you can see that its use a weird structure when comparing to the normal .</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/posts/cve/feature_shit.png" />
+    </item>
     
     <item>
       <title>PicoCTF 2025</title>
