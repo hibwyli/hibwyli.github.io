@@ -2,69 +2,102 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Writeup on hibwyli</title>
-    <link>//localhost:1313/categories/writeup/</link>
+    <link>/categories/writeup/</link>
     <description>Recent content in Writeup on hibwyli</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © Hibwyli</copyright>
-    <lastBuildDate>Thu, 12 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/categories/writeup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="/categories/writeup/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>New PP2RCE Gadget</title>
+      <link>/posts/prototypegadget/</link>
+      <pubDate>Tue, 19 Aug 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/prototypegadget/</guid>
+      <description>Prototype pollution to RCE gadget in node js newest with module imports # A Prototype pollution gadget in newest node js (v24.6.0): Example : Package.json :
+{ &amp;#34;name&amp;#34;: &amp;#34;test&amp;#34;, &amp;#34;version&amp;#34;: &amp;#34;1.0.0&amp;#34;, &amp;#34;description&amp;#34;: &amp;#34;&amp;#34;, &amp;#34;license&amp;#34;: &amp;#34;ISC&amp;#34;, &amp;#34;author&amp;#34;: &amp;#34;&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;commonjs&amp;#34;, &amp;#34;main&amp;#34;: &amp;#34;index.js&amp;#34;, &amp;#34;scripts&amp;#34;: { &amp;#34;test&amp;#34;: &amp;#34;echo \&amp;#34;Error: no test specified\&amp;#34; &amp;amp;&amp;amp; exit 1&amp;#34; } } Note : this just works if the type is &amp;ldquo;commonjs&amp;rdquo; or &amp;ldquo;module&amp;rdquo; . And the javascript stored in &amp;ldquo;a.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="/posts/prototypegadget/feature_life.png" />
+    </item>
+    
+    <item>
+      <title>Some notes on EJS2RCE</title>
+      <link>/posts/ejs2rce/</link>
+      <pubDate>Sun, 20 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/ejs2rce/</guid>
+      <description>DEEP DOWN TO EJS # Example usage : # Đơn giản như sau thui : const ejs = require(&amp;#34;ejs&amp;#34;) const template = &amp;#39;&amp;lt;h1&amp;gt;Hello &amp;lt;%= name %&amp;gt;&amp;lt;/h1&amp;gt;&amp;#39;; ejs.clearCache(); const data = { name: &amp;#34;12113awefeaw&amp;#34; } const compiled = ejs.render(template, data, {}); console.log(compiled.toString()) How ejs works # Ta cùng đọc qua về hàm render :
+exports.render = function (template, d, o) { var data = d || utils.createNullProtoObjWherePossible(); var opts = o || utils.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="/posts/ejs2rce/feature.png" />
+    </item>
+    
+    <item>
+      <title>Some notes on DomPurify</title>
+      <link>/posts/dompurify/</link>
+      <pubDate>Thu, 10 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/dompurify/</guid>
+      <description>DEEP DOWN TO DOMPURIFY # Some note when learning mxss. Source : https://mizu.re/post/exploring-the-dompurify-library-bypasses-and-fixes
+DOWPURFIY WORKFLOWS : # initDocument : Dùng API DOMParser để parse dữ liệu đúng như Browser parse createNodeIterator : Dùng API NodeIterator để iterate qua tất cả các node sanitizeElement : Kiểm tra tag allowed or not _sanitizeShadowDOM : The NodeIterator API doesn&amp;rsquo;t iterate over the template tag by default. Recursively sanitizes when it reaches a DocumentFragment.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="/posts/dompurify/feature_life.png" />
+    </item>
     
     <item>
       <title>Rebuild CVE-2025-49113</title>
-      <link>//localhost:1313/posts/cve/</link>
+      <link>/posts/cve/</link>
       <pubDate>Thu, 12 Jun 2025 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/posts/cve/</guid>
+      <guid>/posts/cve/</guid>
       <description>Rebuild CVE-2025-49113 # Source : https://fearsoff.org/research/roundcube
 Root cause : # Bug at custom unserialization Sink In Secure Deserialization at Pear Crypt package. Introduction: # Roundcub is a free and open source webmail software for the masses, written in PHP. How roundcube handle session ? # It will serialize of data and then base64 encode then store into MYSQL at table session with columns vars. It sound simple right ? But the problem when you try to decode that base64 is : Well you can see that its use a weird structure when comparing to the normal .</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/posts/cve/feature_shit.png" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="/posts/cve/feature_shit.png" />
     </item>
     
     <item>
       <title>PicoCTF 2025</title>
-      <link>//localhost:1313/posts/pico/</link>
+      <link>/posts/pico/</link>
       <pubDate>Tue, 25 Mar 2025 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/posts/pico/</guid>
+      <guid>/posts/pico/</guid>
       <description>Secure Email Service # This is the hardest web challenge from picoCTF. Knowledge : MIME email document structure, Signed Email, Header Injection, Breaking weak cryptography.
 Find the sink : # So the challenge gives us a bot with flag in localStorage and does some stuffs. from os import environ from playwright.async_api import async_playwright, expect import asyncio import re flag = environ.get(&amp;#39;FLAG&amp;#39;, &amp;#39;picoCTF{flag}&amp;#39;) password = environ.get(&amp;#39;PASSWORD&amp;#39;, &amp;#39;admin@ses&amp;#39;) async def bot(): async with asyncio.</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/posts/pico/feature.png" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="/posts/pico/feature.png" />
     </item>
     
     <item>
       <title>Hack The Box University 2024</title>
-      <link>//localhost:1313/posts/htb/</link>
+      <link>/posts/htb/</link>
       <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/posts/htb/</guid>
+      <guid>/posts/htb/</guid>
       <description>Write ups HTB UNIVERSITY # Web armaxis # Logic is only thing
 Overview : # We are given a page and a email host to receive OTP. Main goal is to get access as an admin. We can abuse the forget password function to achieve change the admin password due to flaw in implementation.
 router.post(&amp;#34;/reset-password&amp;#34;, async (req, res) =&amp;gt; { const { token, newPassword, email } = req.body; // Added &amp;#39;email&amp;#39; parameter if (!</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/posts/htb/feature_wanna.jpg" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="/posts/htb/feature_wanna.jpg" />
     </item>
     
     <item>
       <title>Sushi Search and Chrome Detect Engine</title>
-      <link>//localhost:1313/posts/sushi/</link>
+      <link>/posts/sushi/</link>
       <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/posts/sushi/</guid>
+      <guid>/posts/sushi/</guid>
       <description>Sushi Search # Read this before : Blog
 Type: Xss through missing charset
 Chromium detect engine This is really hard to me , and i just can solve after reading script :v SOURCE CODE : # This type of ctfs is just creating a xss url and send to bot and get their cookies(flag) , so we focus on Xss. But &amp;hellip;. :::danger They sanitize it with DomPurify at newest version !</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/posts/sushi/feature_life.png" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="/posts/sushi/feature_life.png" />
     </item>
     
     <item>
       <title>WannaGame</title>
-      <link>//localhost:1313/posts/wannagame/</link>
+      <link>/posts/wannagame/</link>
       <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate>
       
-      <guid>//localhost:1313/posts/wannagame/</guid>
+      <guid>/posts/wannagame/</guid>
       <description>Write ups WannaGame # Dox List: # Source code : # CVE-2024-42352: https://nvd.nist.gov/vuln/detail/CVE-2024-42352
 Server :
 @app.route(&amp;#39;/health_check&amp;#39;) def health_check(): cmd = request.args.get(&amp;#39;cmd&amp;#39;) or &amp;#39;ping&amp;#39; health_check = f&amp;#39;echo \&amp;#39;db.runCommand(&amp;#34;{cmd}&amp;#34;).ok\&amp;#39; | mongosh mongodb:27017/app --quiet&amp;#39; try: result = subprocess.run(health_check, shell=True, capture_output=True, text=True, timeout=2) app.logger.info(result) return &amp;#39;Database is responding&amp;#39; if &amp;#39;1&amp;#39; in result.stdout else &amp;#39;Database is not responding&amp;#39; except subprocess.TimeoutExpired: return &amp;#39;Database is not responding&amp;#39; @app.route(&amp;#39;/api/dogs&amp;#39;) def get_dogs(): app.logger.info(f&amp;#34;Requests Header : {request.headers}&amp;#34;) dogs = [] for dog in app_db[&amp;#39;doxlist&amp;#39;].</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/posts/wannagame/feature_wanna.jpg" />
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="/posts/wannagame/feature_wanna.jpg" />
     </item>
     
   </channel>
