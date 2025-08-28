@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © Hibwyli</copyright>
-    <lastBuildDate>Tue, 19 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Some notes on Web Assembly</title>
+      <link>//localhost:1313/posts/wasm/</link>
+      <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
+      
+      <guid>//localhost:1313/posts/wasm/</guid>
+      <description>Resource : https://media.ccc.de/v/why2025-226-escaping-a-misleading-sandbox-breaking-the-webassembly-javascript-barrier https://webassembly.github.io/spec/core/intro/introduction.html https://developer.mozilla.org/en-US/docs/WebAssembly https://phrack.org/issues/72/10_md#article
+What is wasm ? # In short, its used for optimizing some actions for the browser. It doesn&amp;rsquo;t have any access to Dom or Javascript Web Api . The only way it can interact with that is through an import object . But we should learn some basic first . Understanding WebAssembly text format # There&amp;rsquo;s 2 type of file , wat and wasm. But we should code in wat because it is readable form.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="//localhost:1313/posts/wasm/feature.png" />
+    </item>
     
     <item>
       <title>New PP2RCE Gadget</title>

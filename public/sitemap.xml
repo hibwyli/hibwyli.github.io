@@ -4,7 +4,13 @@
 
   <url>
     <loc>//localhost:1313/</loc>
-    <lastmod>2025-08-19T00:00:00+00:00</lastmod>
+    <lastmod>2025-08-28T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>//localhost:1313/posts/wasm/</loc>
+    <lastmod>2025-08-28T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
