@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on hibwyli</title>
-    <link>/categories/</link>
+    <link>//localhost:1313/categories/</link>
     <description>Recent content in Categories on hibwyli</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>Copyright © Hibwyli</copyright>
-    <lastBuildDate>Thu, 28 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Oct 2025 00:00:00 +0000</lastBuildDate><atom:link href="//localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Writeup</title>
-      <link>/categories/writeup/</link>
-      <pubDate>Thu, 28 Aug 2025 00:00:00 +0000</pubDate>
+      <link>//localhost:1313/categories/writeup/</link>
+      <pubDate>Mon, 06 Oct 2025 00:00:00 +0000</pubDate>
       
-      <guid>/categories/writeup/</guid>
+      <guid>//localhost:1313/categories/writeup/</guid>
       <description></description>
       
     </item>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" class="scroll-smooth" data-default-appearance="dark"
-  data-auto-appearance="true"><head>
+  data-auto-appearance="true"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   
   <meta http-equiv="content-language" content="en" />
@@ -15,7 +15,7 @@
   <meta name="keywords" content="Web, " />
   
   
-  <link rel="canonical" href="/posts/wannagame/" />
+  <link rel="canonical" href="//localhost:1313/posts/wannagame/" />
   
   
   
@@ -69,13 +69,13 @@
 Server :
 @app.route(&#39;/health_check&#39;) def health_check(): cmd = request.args.get(&#39;cmd&#39;) or &#39;ping&#39; health_check = f&#39;echo \&#39;db.runCommand(&#34;{cmd}&#34;).ok\&#39; | mongosh mongodb:27017/app --quiet&#39; try: result = subprocess.run(health_check, shell=True, capture_output=True, text=True, timeout=2) app.logger.info(result) return &#39;Database is responding&#39; if &#39;1&#39; in result.stdout else &#39;Database is not responding&#39; except subprocess.TimeoutExpired: return &#39;Database is not responding&#39; @app.route(&#39;/api/dogs&#39;) def get_dogs(): app.logger.info(f&#34;Requests Header : {request.headers}&#34;) dogs = [] for dog in app_db[&#39;doxlist&#39;]." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/posts/wannagame/" /><meta property="og:image" content="/posts/wannagame/feature_wanna.jpg" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="//localhost:1313/posts/wannagame/" /><meta property="og:image" content="//localhost:1313/posts/wannagame/feature_wanna.jpg" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-08-27T00:00:00+00:00" />
 <meta property="article:modified_time" content="2024-08-27T00:00:00+00:00" />
 
 
   <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="/posts/wannagame/feature_wanna.jpg" /><meta name="twitter:title" content="WannaGame"/>
+<meta name="twitter:image" content="//localhost:1313/posts/wannagame/feature_wanna.jpg" /><meta name="twitter:title" content="WannaGame"/>
 <meta name="twitter:description" content="Write ups WannaGame # Dox List: # Source code : # CVE-2024-42352: https://nvd.nist.gov/vuln/detail/CVE-2024-42352
 Server :
 @app.route(&#39;/health_check&#39;) def health_check(): cmd = request.args.get(&#39;cmd&#39;) or &#39;ping&#39; health_check = f&#39;echo \&#39;db.runCommand(&#34;{cmd}&#34;).ok\&#39; | mongosh mongodb:27017/app --quiet&#39; try: result = subprocess.run(health_check, shell=True, capture_output=True, text=True, timeout=2) app.logger.info(result) return &#39;Database is responding&#39; if &#39;1&#39; in result.stdout else &#39;Database is not responding&#39; except subprocess.TimeoutExpired: return &#39;Database is not responding&#39; @app.route(&#39;/api/dogs&#39;) def get_dogs(): app.logger.info(f&#34;Requests Header : {request.headers}&#34;) dogs = [] for dog in app_db[&#39;doxlist&#39;]."/>
@@ -91,7 +91,7 @@ Server :
     
     "abstract": "Write ups WannaGame # Dox List: # Source code : # CVE-2024-42352: https:\/\/nvd.nist.gov\/vuln\/detail\/CVE-2024-42352\nServer :\n@app.route(\u0026#39;\/health_check\u0026#39;) def health_check(): cmd = request.args.get(\u0026#39;cmd\u0026#39;) or \u0026#39;ping\u0026#39; health_check = f\u0026#39;echo \\\u0026#39;db.runCommand(\u0026#34;{cmd}\u0026#34;).ok\\\u0026#39; | mongosh mongodb:27017\/app --quiet\u0026#39; try: result = subprocess.run(health_check, shell=True, capture_output=True, text=True, timeout=2) app.logger.info(result) return \u0026#39;Database is responding\u0026#39; if \u0026#39;1\u0026#39; in result.stdout else \u0026#39;Database is not responding\u0026#39; except subprocess.TimeoutExpired: return \u0026#39;Database is not responding\u0026#39; @app.route(\u0026#39;\/api\/dogs\u0026#39;) def get_dogs(): app.logger.info(f\u0026#34;Requests Header : {request.headers}\u0026#34;) dogs = [] for dog in app_db[\u0026#39;doxlist\u0026#39;].",
     "inLanguage": "en",
-    "url" : "\/posts\/wannagame\/",
+    "url" : "\/\/localhost:1313\/posts\/wannagame\/",
     "author" : {
       "@type": "Person",
       "name": ""
@@ -2295,7 +2295,7 @@ We need to stole 2 types of token : SECURITY_TOKEN and SECRET_TOKEN.  Use this t
 <div
   id="search-wrapper"
   class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
-  data-url="/"
+  data-url="//localhost:1313/"
   style="z-index:500"
 >
   <div
